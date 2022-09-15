@@ -1,4 +1,4 @@
-<h1>Register</h1>
+<h2 class="font-semibold text-xl mb-4 font-heading">Register</h2>
 
 <.form let={f} for={@changeset} action={Routes.user_registration_path(@conn, :create)}>
   <%= if @changeset.action do %>
@@ -7,20 +7,59 @@
     </div>
   <% end %>
 
-  <%= label f, :email %>
-  <%= email_input f, :email, required: true %>
-  <%= error_tag f, :email %>
+  <div class="flex flex-col gap-y-4 drop-shadow-lg bg-white p-8 rounded-lg">
+    <div class="flex flex-col gap-y-1">
+      <%= label f, :name, class: "text-md" %>
+      <%= text_input f, :name, required: true, class: "border-none bg-light rounded-md"  %>
+      <%= error_tag f, :name %>
+    </div>
 
-  <%= label f, :password %>
-  <%= password_input f, :password, required: true %>
-  <%= error_tag f, :password %>
+    <div class="flex flex-col gap-y-1">
+      <%= label f, :email %>
+      <%= email_input f, :email, required: true, class: "border-none bg-light rounded-md"  %>
+      <%= error_tag f, :email %>
+    </div>
 
-  <div>
-    <%= submit "Register" %>
+    <div class="flex flex-col gap-y-1">
+      <%= label f, :email_confirmation %>
+      <%= email_input f, :email_confirmation, required: true, class: "border-none bg-light rounded-md"  %>
+      <%= error_tag f, :email_confirmation %>
+    </div>
+
+    <div class="flex flex-col gap-y-1">
+      <%= label f, :password %>
+      <%= password_input f, :password, required: true, class: "border-none bg-light rounded-md"  %>
+      <%= error_tag f, :password %>
+    </div>
+
+      <%= submit "Register", class: "w-1/2 mx-auto bg-primary text-white py-2 rounded-md mt-4" %>
   </div>
 </.form>
 
-<p>
-  <%= link "Log in", to: Routes.user_session_path(@conn, :new) %> |
-  <%= link "Forgot your password?", to: Routes.user_reset_password_path(@conn, :new) %>
-</p>
+<%# <h1>Register</h1> %>
+<%#
+
+<%# <.form let={f} for={@changeset} action={Routes.user_registration_path(@conn, :create)}> %>
+<%#   <%= if @changeset.action do %1> %>
+<%#     <div class="alert alert-danger"> %>
+<%#       <p>Oops, something went wrong! Please check the errors below.</p> %>
+<%#     </div> %>
+<%#   <% end %1> %>
+
+<%#   <%= label f, :email %1> %>
+<%#   <%= email_input f, :email, required: true %1> %>
+<%#   <%= error_tag f, :email %1> %>
+
+<%#   <%= label f, :password %1> %>
+<%#   <%= password_input f, :password, required: true %1> %>
+<%#   <%= error_tag f, :password %1> %>
+
+<%#   <div> %>
+<%#     <%= submit "Register" %1> %>
+<%#   </div> %>
+<%# </.form> %>
+
+<%# <p> %>
+<%#   <%= link "Log in", to: Routes.user_session_path(@conn, :new) %1> | %>
+<%#   <%= link "Forgot your password?", to: Routes.user_reset_password_path(@conn, :new) %1> %>
+<%# </p> %>
