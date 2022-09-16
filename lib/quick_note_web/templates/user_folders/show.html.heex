@@ -1,4 +1,8 @@
-<div class="flex items-center justify-between mb-4">
+<%= link to: Routes.user_folders_path(@conn, :index), class: "flex items-center gap-x-2" do %>
+  <%= Heroicons.icon("arrow-left", type: "outline", class: "w-6") %>
+  <span>Back</span>
+<% end %>
+<div class="flex items-center justify-between mb-4 mt-6">
   <h2 class="font-semibold text-xl"><%= @folder.name %></h2>
   <%= link("Create note", to: Routes.user_notes_path(@conn, :new, @folder.id))  %>
 </div>
