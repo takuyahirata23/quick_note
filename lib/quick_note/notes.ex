@@ -2,7 +2,7 @@ defmodule QuickNote.Notes do
   import Ecto.Query, warn: false
 
   alias QuickNote.Repo
-  alias QuickNote.Notes.{Folder}
+  alias QuickNote.Notes.{Folder, Note}
 
   def change_folder_registration(%Folder{} = folder, attrs \\ %{}) do
     Folder.registration_changeset(folder, attrs)
@@ -22,14 +22,28 @@ defmodule QuickNote.Notes do
   end
 
   def get_folders_with_note_counts(user) do
-    Folder
-    |> where(user_id: ^user.id)
-    |> preload([:notes])
-    |> Repo.all()
+    query =
+      from f in Folder,
+        where: [user_id: ^user.id],
+        left_join: n in assoc(f, :notes),
+        group_by: f.id,
+        select: %{folder: f, note_count: count(n.id)}
+
+    Repo.all(query)
   end
 
   def get_folder_by_id(id) when is_binary(id) do
     Folder
     |> Repo.get_by!(id: id)
+  end
+
+  def change_note_registration(%Note{} = note, attrs \\ %{}) do
+    Note.registration_changeset(note, attrs)
+  end
+
+  def register_note(attrs) do
+    %Note{}
+    |> Note.registration_changeset(attrs)
+    |> Repo.insert()
   end
 end

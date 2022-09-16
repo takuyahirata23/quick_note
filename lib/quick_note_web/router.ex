@@ -79,6 +79,8 @@ defmodule QuickNoteWeb.Router do
     put "/users/settings", UserSettingsController, :update
     get "/users/settings/confirm_email/:token", UserSettingsController, :confirm_email
     resources "/users/folders", UserFoldersController
+    get "/users/folders/:id/notes", UserNotesController, :new
+    post "/users/folders/:id/notes", UserNotesController, :create
   end
 
   scope "/", QuickNoteWeb do

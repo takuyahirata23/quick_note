@@ -5,10 +5,7 @@ defmodule QuickNoteWeb.UserFoldersController do
   alias QuickNote.Notes
 
   def index(conn, _params) do
-    folders = Notes.get_folders(conn.assigns.current_user)
-    # test = Notes.get_folders_with_note_counts(conn.assigns.current_user)
-
-    # IO.inspect(test)
+    folders = Notes.get_folders_with_note_counts(conn.assigns.current_user)
     render(conn, "index.html", folders: folders)
   end
 

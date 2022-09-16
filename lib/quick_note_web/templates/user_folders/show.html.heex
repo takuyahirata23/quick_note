@@ -1,1 +1,4 @@
-<h2><%= @folder.name %></h2>
+<div class="flex items-center justify-between mb-4">
+  <h2 class="font-semibold text-xl"><%= @folder.name %></h2>
+  <%= link("Create note", to: Routes.user_notes_path(@conn, :new, @folder.id))  %>
+</div>

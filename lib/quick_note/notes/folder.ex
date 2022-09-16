@@ -12,6 +12,8 @@ defmodule QuickNote.Notes.Folder do
 
     belongs_to :user, QuickNote.Accounts.User
 
+    has_many :notes, QuickNote.Notes.Note
+
     timestamps()
   end
 
