@@ -20,4 +20,16 @@ defmodule QuickNote.Notes do
     |> where(user_id: ^user.id)
     |> Repo.all()
   end
+
+  def get_folders_with_note_counts(user) do
+    Folder
+    |> where(user_id: ^user.id)
+    |> preload([:notes])
+    |> Repo.all()
+  end
+
+  def get_folder_by_id(id) when is_binary(id) do
+    Folder
+    |> Repo.get_by!(id: id)
+  end
 end
