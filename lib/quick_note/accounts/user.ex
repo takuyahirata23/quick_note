@@ -1,8 +1,11 @@
 defmodule QuickNote.Accounts.User do
   use Ecto.Schema
+
   import Ecto.Changeset
+
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
+
   schema "users" do
     field :name, :string
     field :email, :string
@@ -11,6 +14,8 @@ defmodule QuickNote.Accounts.User do
     field :hashed_password, :string, redact: true
     field :is_admin, :boolean, default: false
     field :confirmed_at, :naive_datetime
+
+    has_many :folders, QuickNote.Notes.Folder
 
     timestamps()
   end
