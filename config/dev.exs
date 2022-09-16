@@ -26,9 +26,9 @@ config :quick_note, QuickNoteWeb.Endpoint,
   debug_errors: true,
   secret_key_base: "tcOecc4gCUMBNkhvdAIy3R72PL7DidQ03iFkZLSModtGU109nuZuFjuiTOVr1oeK",
   watchers: [
-    tailwind: {Tailwind, :install_and_run, [:default, ~w(--watch)]},
     # Start the esbuild watcher by calling Esbuild.install_and_run(:default, args)
-    esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]}
+    esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]},
+    tailwind: {Tailwind, :install_and_run, [:default, ~w(--watch)]}
   ]
 
 # ## SSL Support
