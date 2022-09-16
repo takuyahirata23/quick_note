@@ -20,7 +20,7 @@ defmodule QuickNoteWeb.UserFoldersController do
         render(conn, "new.html", changeset: changeset)
 
       {:ok, _notes} ->
-        render(conn, "index.html")
+        redirect(conn, to: Routes.user_folders_path(conn, :index))
     end
   end
 

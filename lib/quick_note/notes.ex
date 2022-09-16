@@ -33,8 +33,12 @@ defmodule QuickNote.Notes do
   end
 
   def get_folder_by_id(id) when is_binary(id) do
-    Folder
-    |> Repo.get_by!(id: id)
+    query =
+      from f in Folder,
+        where: [id: ^id],
+        preload: [:notes]
+
+    Repo.one(query)
   end
 
   def change_note_registration(%Note{} = note, attrs \\ %{}) do
