@@ -10,8 +10,10 @@
 <ul class="flex flex-col gap-y-4">
   <%= for note <- @folder.notes do %>
     <li class="flex flex-col gap-y-4 drop-shadow-lg bg-white p-8 rounded-lg">
-      <h3><%= note.title %></h3>
-      <p><%= note.copy %></p>
+      <%= link to: Routes.user_notes_path(@conn, :show, @folder.id, note.id) do %>
+        <h3><%= note.title %></h3>
+        <p><%= note.copy %></p>
+      <% end %>
     </li>
   <% end %>
 </ul>
