@@ -81,6 +81,7 @@ defmodule QuickNoteWeb.Router do
     resources "/users/folders", UserFoldersController
     get "/users/folders/:id/notes", UserNotesController, :new
     post "/users/folders/:id/notes", UserNotesController, :create
+    get "/users/folders/:id/notes/:note_id", UserNotesController, :show
   end
 
   scope "/", QuickNoteWeb do

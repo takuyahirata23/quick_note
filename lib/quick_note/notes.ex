@@ -50,4 +50,11 @@ defmodule QuickNote.Notes do
     |> Note.registration_changeset(attrs)
     |> Repo.insert()
   end
+
+  def get_note_by_id(user_id, id) do
+    Note
+    |> where(user_id: ^user_id)
+    |> where(id: ^id)
+    |> Repo.one()
+  end
 end

@@ -1,0 +1,12 @@
+<%= link to: Routes.user_folders_path(@conn, :show, @folder_id), class: "flex items-center gap-x-2" do %>
+  <%= Heroicons.icon("arrow-left", type: "outline", class: "w-6") %>
+  <span>Back</span>
+<% end %>
+<div class="flex flex-col gap-y-4 drop-shadow-lg bg-white p-8 rounded-lg">
+    <h2 class="font-semibold text-xl"><%= @note.title %></h2>
+    <span><%= @note.copy %></span>
+    <%= if @note.description do %>
+      <p><%= @note.description %></p>
+    <% end %>
+</div>
+
