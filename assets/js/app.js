@@ -19,47 +19,40 @@
 //
 
 // Include phoenix_html to handle method=PUT/DELETE in forms and buttons.
-import "phoenix_html"
+import "phoenix_html";
 // Establish Phoenix Socket and LiveView configuration.
-import {Socket} from "phoenix"
-import {LiveSocket} from "phoenix_live_view"
-import topbar from "../vendor/topbar"
+import { Socket } from "phoenix";
+import { LiveSocket } from "phoenix_live_view";
+import topbar from "../vendor/topbar";
 
-let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
-let liveSocket = new LiveSocket("/live", Socket, {params: {_csrf_token: csrfToken}})
+let csrfToken = document
+  .querySelector("meta[name='csrf-token']")
+  .getAttribute("content");
+let liveSocket = new LiveSocket("/live", Socket, {
+  params: { _csrf_token: csrfToken },
+});
 
 // Show progress bar on live navigation and form submits
-topbar.config({barColors: {0: "#29d"}, shadowColor: "rgba(0, 0, 0, .3)"})
-window.addEventListener("phx:page-loading-start", info => topbar.show())
-window.addEventListener("phx:page-loading-stop", info => topbar.hide())
+topbar.config({ barColors: { 0: "#29d" }, shadowColor: "rgba(0, 0, 0, .3)" });
+window.addEventListener("phx:page-loading-start", (info) => topbar.show());
+window.addEventListener("phx:page-loading-stop", (info) => topbar.hide());
 
-const btn = document.querySelector('.copy-button')
+const btn = document.querySelector(".copy-button");
 
-btn?.addEventListener('click', function(e) {
-  const target = e.target.parentNode  
-  console.log(e.target)
-  // target.classList.add("stroke-cyan-500")
-  // const copy = target.dataset.copy
-  // navigator.clipboard.writeText(copy).finally(() => {
-  // target.classList.remove("stroke-cyan-500")
-  // })
-})
-//
-// btn?.addEventListener('click', function(e) {
-//   const target = e.target.parentNode  
-//   target.classList.add("stroke-cyan-500")
-//   const copy = target.dataset.copy
-//   navigator.clipboard.writeText(copy).finally(() => {
-//   target.classList.remove("stroke-cyan-500")
-//   })
-// })
+btn?.addEventListener("click", function () {
+  this.children[0].classList.add("stroke-cyan-500");
+  const copy = this.dataset.copy;
+
+  navigator.clipboard.writeText(copy).finally(() => {
+    setTimeout(() => this.children[0].classList.remove("stroke-cyan-500"), 300);
+  });
+});
 
 // connect if there are any LiveViews on the page
-liveSocket.connect()
+liveSocket.connect();
 
 // expose liveSocket on window for web console debug logs and latency simulation:
 // >> liveSocket.enableDebug()
 // >> liveSocket.enableLatencySim(1000)  // enabled for duration of browser session
 // >> liveSocket.disableLatencySim()
-window.liveSocket = liveSocket
-
+window.liveSocket = liveSocket;
