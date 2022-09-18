@@ -1,6 +1,7 @@
 <h2 class="font-semibold text-xl my-4 font-heading"><%= @user.name %></h2>
 
-<div class="w-1/2 mx-auto flex">
-  <%= link "Delete Account", to: Routes.user_profile_path(@conn, :delete), method: :delete, class: "p-4 text-secondary rounded-lg text-center flex-1" %>
+<div class="w-1/2 mx-auto flex flex-col justify-center gap-y-2">
+  <%= link "Log out", to: Routes.user_session_path(@conn, :delete), method: :delete, class: "p-2 bg-accent rounded-lg text-center flex-1"%>
+  <%= link "Delete Account", to: Routes.user_profile_path(@conn, :delete), method: :delete, class: "p-2 text-secondary rounded-lg text-center flex-1" %>
 </div>
 
