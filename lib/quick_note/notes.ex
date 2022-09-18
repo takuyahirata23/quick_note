@@ -63,4 +63,18 @@ defmodule QuickNote.Notes do
     |> where(id: ^id)
     |> Repo.one()
   end
+
+  def get_note_without_folder_by_id(user_id, id) do
+    Note
+    |> where(user_id: ^user_id)
+    |> where(id: ^id)
+    |> select([:id, :title, :copy, :description])
+    |> Repo.one()
+  end
+
+  def update_note(note, attrs) do
+    note
+    |> Note.note_changeset(attrs)
+    |> Repo.update()
+  end
 end
