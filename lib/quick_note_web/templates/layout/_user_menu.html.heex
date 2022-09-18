@@ -1,10 +1,16 @@
-<ul>
+<div class="flex items-center gap-x-4">
   <%= if @current_user do %>
-    <%# <li><%= @current_user.name %1></li> %>
-    <%= link "Folders", to: Routes.user_folders_path(@conn, :index) %>
-    <li><%= link "Log out", to: Routes.user_session_path(@conn, :delete), method: :delete %></li>
-  <% else %>
-    <li><%= link "Register", to: Routes.user_registration_path(@conn, :new) %></li>
-    <li><%= link "Log in", to: Routes.user_session_path(@conn, :new) %></li>
+    <%= link @current_user.name, to: Routes.user_profile_path(@conn, :index) %>
   <% end %>
-</ul>
+  <ul>
+    <%= if @current_user do %>
+      <li>
+        <%= link "Folders", to: Routes.user_folders_path(@conn, :index) %>
+      </li>
+      <li><%= link "Log out", to: Routes.user_session_path(@conn, :delete), method: :delete %></li>
+    <% else %>
+      <li><%= link "Register", to: Routes.user_registration_path(@conn, :new) %></li>
+      <li><%= link "Log in", to: Routes.user_session_path(@conn, :new) %></li>
+    <% end %>
+  </ul>
+</div>

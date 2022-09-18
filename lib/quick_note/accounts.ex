@@ -350,4 +350,8 @@ defmodule QuickNote.Accounts do
       {:error, :user, changeset, _} -> {:error, changeset}
     end
   end
+
+  def delete_user_account(user) do
+    Repo.delete(user)
+  end
 end
