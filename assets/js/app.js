@@ -39,7 +39,7 @@ window.addEventListener("phx:page-loading-stop", (info) => topbar.hide());
 
 const btn = document.querySelector(".copy-button");
 
-btn?.addEventListener("click", function () {
+btn?.addEventListener("click", function (e) {
   this.children[0].classList.add("stroke-cyan-500");
   const copy = this.dataset.copy;
 

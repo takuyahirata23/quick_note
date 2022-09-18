@@ -2,13 +2,13 @@
   <%= Heroicons.icon("arrow-left", type: "outline", class: "w-6") %>
   <span>Back</span>
 <% end %>
-<div class="flex flex-col gap-y-4 drop-shadow-lg bg-white p-8 rounded-lg">
+<div class="flex flex-col gap-y-4 drop-shadow-lg bg-white p-8 rounded-lg mt-4">
     <h2 class="font-semibold text-xl"><%= @note.title %></h2>
     <div class="flex justify-between">
-    <span><%= @note.copy %></span>
-    <button class="copy-button" data-copy="note.copy">
-      <%= Heroicons.icon("clipboard", type: "outline", class: "w-6") %>
-    </button>
+      <span><%= @note.copy %></span>
+      <button class="copy-button" data-copy="note.copy">
+        <%= Heroicons.icon("clipboard", type: "outline", class: "w-6") %>
+      </button>
     </div>
     <%= if @note.description do %>
       <p><%= @note.description %></p>
