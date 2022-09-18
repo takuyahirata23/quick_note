@@ -41,6 +41,12 @@ defmodule QuickNote.Notes do
     Repo.one(query)
   end
 
+  def update_folder(folder, attrs) do
+    folder
+    |> Folder.folder_changeset(attrs)
+    |> Repo.update()
+  end
+
   def change_note_registration(%Note{} = note, attrs \\ %{}) do
     Note.registration_changeset(note, attrs)
   end

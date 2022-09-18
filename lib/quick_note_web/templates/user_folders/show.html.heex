@@ -4,7 +4,10 @@
 <% end %>
 <div class="flex items-center justify-between mb-4 mt-6">
   <h2 class="font-semibold text-xl"><%= @folder.name %></h2>
-  <%= link("Create note", to: Routes.user_notes_path(@conn, :new, @folder.id))  %>
+  <div class="flex flex-col gap-y-2">
+    <%= link("Create note", to: Routes.user_notes_path(@conn, :new, @folder.id))  %>
+    <%= link("Rename", to: Routes.user_folders_path(@conn, :edit, @folder.id))  %>
+  </div>
 </div>
 
 <ul class="flex flex-col gap-y-4">

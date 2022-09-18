@@ -28,4 +28,22 @@ defmodule QuickNoteWeb.UserFoldersController do
     folder = Notes.get_folder_by_id(id)
     render(conn, "show.html", folder: folder)
   end
+
+  def edit(conn, %{"id" => id}) do
+    folder = Notes.get_folder_by_id(id)
+    changeset = Notes.change_folder_registration(folder)
+    render(conn, "edit.html", folder: folder, changeset: changeset)
+  end
+
+  def update(conn, %{"id" => id, "folder" => attrs}) do
+    folder = Notes.get_folder_by_id(id)
+
+    case Notes.update_folder(folder, attrs) do
+      {:error, %Ecto.Changeset{} = changeset} ->
+        render(conn, "edit.html", folder: folder, changeset: changeset)
+
+      {:ok, _folder} ->
+        redirect(conn, to: Routes.user_folders_path(conn, :show, id))
+    end
+  end
 end

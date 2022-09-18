@@ -23,4 +23,11 @@ defmodule QuickNote.Notes.Folder do
     |> validate_required([:name])
     |> validate_length(:name, min: 2, max: 50)
   end
+
+  def folder_changeset(folder, attrs) do
+    folder
+    |> cast(attrs, [:name, :is_pinned])
+    |> validate_required([:name])
+    |> validate_length(:name, min: 2, max: 50)
+  end
 end
