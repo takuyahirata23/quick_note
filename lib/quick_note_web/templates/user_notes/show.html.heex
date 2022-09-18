@@ -6,7 +6,7 @@
     <h2 class="font-semibold text-xl"><%= @note.title %></h2>
     <div class="flex justify-between bg-light p-4 rounded-lg">
       <span><%= @note.copy %></span>
-      <button class="copy-button" data-copy="note.copy">
+      <button class="copy-button" data-copy={@note.copy}>
         <%= Heroicons.icon("clipboard", type: "outline", class: "w-6") %>
       </button>
     </div>
