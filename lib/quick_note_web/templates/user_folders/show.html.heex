@@ -9,11 +9,14 @@
 
 <ul class="flex flex-col gap-y-4">
   <%= for note <- @folder.notes do %>
-    <li class="flex flex-col gap-y-4 drop-shadow-lg bg-white p-8 rounded-lg">
-      <%= link to: Routes.user_notes_path(@conn, :show, @folder.id, note.id) do %>
-        <h3><%= note.title %></h3>
-        <p><%= note.copy %></p>
+    <li class="flex justify-between flex-1 items-center gap-y-4 drop-shadow-lg bg-white rounded-lg">
+      <%= link to: Routes.user_notes_path(@conn, :show, @folder.id, note.id), class: "p-6 flex-1" do %>
+        <h3 class="font-semibold mb-2"><%= note.title %></h3>
+        <span><%= note.copy %></span>
       <% end %>
+      <button class="copy-button p-6" data-copy="try">
+        <%= Heroicons.icon("clipboard", type: "outline", class: "w-6") %>
+      </button>
     </li>
   <% end %>
 </ul>
