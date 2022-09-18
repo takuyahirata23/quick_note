@@ -14,7 +14,7 @@
         <h3 class="font-semibold mb-2"><%= note.title %></h3>
         <span><%= note.copy %></span>
       <% end %>
-      <button class="copy-button p-6" data-copy="try">
+      <button class="copy-button p-6" data-copy={note.copy}>
         <%= Heroicons.icon("clipboard", type: "outline", class: "w-6") %>
       </button>
     </li>
