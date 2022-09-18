@@ -1,4 +1,9 @@
-<h2 class="font-semibold text-xl mb-4 font-heading">Create Folder</h2>
+<%= link to: Routes.user_folders_path(@conn, :show, @folder_id), class: "flex items-center gap-x-2" do %>
+  <%= Heroicons.icon("arrow-left", type: "outline", class: "w-6") %>
+  <span>Back</span>
+<% end %>
+
+<h2 class="font-semibold text-xl my-4 font-heading">Create Folder</h2>
 
 <.form let={f} for={@changeset} action={Routes.user_notes_path(@conn, :create, @folder_id)}>
   <%= if @changeset.action do %>
