@@ -33,6 +33,27 @@ topbar.config({barColors: {0: "#29d"}, shadowColor: "rgba(0, 0, 0, .3)"})
 window.addEventListener("phx:page-loading-start", info => topbar.show())
 window.addEventListener("phx:page-loading-stop", info => topbar.hide())
 
+const btn = document.querySelector('.copy-button')
+
+btn?.addEventListener('click', function(e) {
+  const target = e.target.parentNode  
+  console.log(e.target)
+  // target.classList.add("stroke-cyan-500")
+  // const copy = target.dataset.copy
+  // navigator.clipboard.writeText(copy).finally(() => {
+  // target.classList.remove("stroke-cyan-500")
+  // })
+})
+//
+// btn?.addEventListener('click', function(e) {
+//   const target = e.target.parentNode  
+//   target.classList.add("stroke-cyan-500")
+//   const copy = target.dataset.copy
+//   navigator.clipboard.writeText(copy).finally(() => {
+//   target.classList.remove("stroke-cyan-500")
+//   })
+// })
+
 // connect if there are any LiveViews on the page
 liveSocket.connect()
 
