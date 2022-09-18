@@ -4,13 +4,9 @@ defmodule QuickNote.Notes do
   alias QuickNote.Repo
   alias QuickNote.Notes.{Folder, Note}
 
-  def change_folder_registration(%Folder{} = folder, attrs \\ %{}) do
-    Folder.registration_changeset(folder, attrs)
-  end
-
   def register_folder(attrs, user) do
     %Folder{}
-    |> Folder.registration_changeset(attrs)
+    |> Folder.changeset(attrs)
     |> Ecto.Changeset.put_assoc(:user, user)
     |> Repo.insert()
   end
@@ -43,17 +39,13 @@ defmodule QuickNote.Notes do
 
   def update_folder(folder, attrs) do
     folder
-    |> Folder.folder_changeset(attrs)
+    |> Folder.changeset(attrs)
     |> Repo.update()
-  end
-
-  def change_note_registration(%Note{} = note, attrs \\ %{}) do
-    Note.registration_changeset(note, attrs)
   end
 
   def register_note(attrs) do
     %Note{}
-    |> Note.registration_changeset(attrs)
+    |> Note.changeset(attrs)
     |> Repo.insert()
   end
 
@@ -62,5 +54,19 @@ defmodule QuickNote.Notes do
     |> where(user_id: ^user_id)
     |> where(id: ^id)
     |> Repo.one()
+  end
+
+  def get_note_without_folder_by_id(user_id, id) do
+    Note
+    |> where(user_id: ^user_id)
+    |> where(id: ^id)
+    |> select([:id, :title, :copy, :description])
+    |> Repo.one()
+  end
+
+  def update_note(note, attrs) do
+    note
+    |> Note.changeset(attrs)
+    |> Repo.update()
   end
 end

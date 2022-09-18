@@ -1,0 +1,32 @@
+<%= link to: Routes.user_notes_path(@conn, :show, @folder_id, @note_id), class: "flex items-center gap-x-2" do %>
+  <%= Heroicons.icon("arrow-left", type: "outline", class: "w-6") %>
+  <span>Back</span>
+<% end %>
+
+<.form let={f} for={@changeset} action={Routes.user_notes_path(@conn, :update, @folder_id, @note_id)}>
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Oops, something went wrong! Please check the errors below.</p>
+    </div>
+  <% end %>
+
+  <div class="flex flex-col gap-y-4 drop-shadow-lg bg-white p-8 rounded-lg">
+    <div class="flex flex-col gap-y-1">
+      <%= label f, :title, class: "text-md" %>
+      <%= text_input f, :title, required: true, class: "border-none bg-light rounded-md"  %>
+      <%= error_tag f, :title %>
+    </div>
+    <div class="flex flex-col gap-y-1">
+      <%= label f, :copy, class: "text-md" %>
+      <%= text_input f, :copy, required: true, class: "border-none bg-light rounded-md"  %>
+      <%= error_tag f, :copy %>
+    </div>
+    <div class="flex flex-col gap-y-1">
+      <%= label f, :description, class: "text-md" %>
+      <%= text_input f, :description, class: "border-none bg-light rounded-md"  %>
+      <%= error_tag f, :description %>
+    </div>
+
+      <%= submit "Update", class: "w-1/2 mx-auto bg-primary text-white py-2 rounded-md mt-4" %>
+  </div>
+</.form>

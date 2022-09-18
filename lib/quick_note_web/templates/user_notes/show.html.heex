@@ -3,15 +3,18 @@
   <span>Back</span>
 <% end %>
 <div class="flex flex-col gap-y-4 drop-shadow-lg bg-white p-8 rounded-lg mt-4">
-    <h2 class="font-semibold text-xl"><%= @note.title %></h2>
-    <div class="flex justify-between bg-light p-4 rounded-lg">
-      <span><%= @note.copy %></span>
-      <button class="copy-button" data-copy={@note.copy}>
-        <%= Heroicons.icon("clipboard", type: "outline", class: "w-6") %>
-      </button>
-    </div>
-    <%= if @note.description do %>
-      <p><%= @note.description %></p>
-    <% end %>
+  <div class="flex justify-between items-center">
+    <h2 class="font-semibold text-xl flex-1"><%= @note.title %></h2>
+    <%= link("Edit", to: Routes.user_notes_path(@conn, :edit, @folder_id, @note.id))  %>
+  </div>
+  <div class="flex justify-between bg-light p-4 rounded-lg">
+    <span><%= @note.copy %></span>
+    <button class="copy-button" data-copy={@note.copy}>
+      <%= Heroicons.icon("clipboard", type: "outline", class: "w-6") %>
+    </button>
+  </div>
+  <%= if @note.description do %>
+    <p><%= @note.description %></p>
+  <% end %>
 </div>
 

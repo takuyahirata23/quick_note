@@ -10,7 +10,7 @@ defmodule QuickNoteWeb.UserFoldersController do
   end
 
   def new(conn, _params) do
-    changeset = Notes.change_folder_registration(%Folder{})
+    changeset = Folder.changeset(%Folder{})
     render(conn, "new.html", changeset: changeset)
   end
 
@@ -31,7 +31,7 @@ defmodule QuickNoteWeb.UserFoldersController do
 
   def edit(conn, %{"id" => id}) do
     folder = Notes.get_folder_by_id(id)
-    changeset = Notes.change_folder_registration(folder)
+    changeset = Folder.changeset(folder)
     render(conn, "edit.html", folder: folder, changeset: changeset)
   end
 

@@ -17,14 +17,7 @@ defmodule QuickNote.Notes.Folder do
     timestamps()
   end
 
-  def registration_changeset(folder, attrs) do
-    folder
-    |> cast(attrs, [:name, :is_pinned])
-    |> validate_required([:name])
-    |> validate_length(:name, min: 2, max: 50)
-  end
-
-  def folder_changeset(folder, attrs) do
+  def changeset(folder, attrs \\ %{}) do
     folder
     |> cast(attrs, [:name, :is_pinned])
     |> validate_required([:name])
