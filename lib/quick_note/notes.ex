@@ -43,13 +43,9 @@ defmodule QuickNote.Notes do
     |> Repo.update()
   end
 
-  def change_note_registration(%Note{} = note, attrs \\ %{}) do
-    Note.registration_changeset(note, attrs)
-  end
-
   def register_note(attrs) do
     %Note{}
-    |> Note.registration_changeset(attrs)
+    |> Note.changeset(attrs)
     |> Repo.insert()
   end
 
@@ -70,7 +66,7 @@ defmodule QuickNote.Notes do
 
   def update_note(note, attrs) do
     note
-    |> Note.note_changeset(attrs)
+    |> Note.changeset(attrs)
     |> Repo.update()
   end
 end

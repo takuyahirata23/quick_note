@@ -5,7 +5,7 @@ defmodule QuickNoteWeb.UserNotesController do
   alias QuickNote.Notes
 
   def new(conn, %{"id" => folder_id}) do
-    changeset = Notes.change_note_registration(%Note{})
+    changeset = Note.changeset(%Note{})
     render(conn, "new.html", changeset: changeset, folder_id: folder_id)
   end
 
@@ -29,7 +29,7 @@ defmodule QuickNoteWeb.UserNotesController do
 
   def edit(conn, %{"note_id" => note_id, "id" => folder_id}) do
     note = Notes.get_note_without_folder_by_id(conn.assigns.current_user.id, note_id)
-    changeset = Notes.change_note_registration(note)
+    changeset = Note.changeset(note)
 
     render(conn, "edit.html", changeset: changeset, folder_id: folder_id, note_id: note_id)
   end
