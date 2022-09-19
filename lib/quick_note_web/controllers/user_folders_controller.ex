@@ -46,4 +46,22 @@ defmodule QuickNoteWeb.UserFoldersController do
         redirect(conn, to: Routes.user_folders_path(conn, :show, id))
     end
   end
+
+  def delete(conn, %{"id" => id}) do
+    folder = Notes.get_folder_by_id(id)
+
+    case Notes.delete_folder(folder) do
+      {:error, _} ->
+        conn
+        |> put_flash(:error, "Something went wrong. Please try it later.")
+        |> render("show.html", folder: folder)
+
+      {:ok, _folder} ->
+        folders = Notes.get_folders_with_note_counts(conn.assigns.current_user)
+
+        conn
+        |> put_flash(:info, "Deleted #{folder.name}")
+        |> render("index.html", folders: folders)
+    end
+  end
 end
