@@ -73,4 +73,8 @@ defmodule QuickNote.Notes do
     |> Note.changeset(attrs)
     |> Repo.update()
   end
+
+  def delete_note(note) do
+    Repo.delete(note)
+  end
 end

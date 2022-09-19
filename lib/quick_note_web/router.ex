@@ -86,6 +86,7 @@ defmodule QuickNoteWeb.Router do
     get "/users/folders/:id/notes/:note_id", UserNotesController, :show
     get "/users/folders/:id/notes/:note_id/edit", UserNotesController, :edit
     put "/users/folders/:id/notes/:note_id", UserNotesController, :update
+    delete "/users/folders/:id/notes/:note_id", UserNotesController, :delete
   end
 
   scope "/", QuickNoteWeb do
