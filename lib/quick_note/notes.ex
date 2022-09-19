@@ -43,6 +43,10 @@ defmodule QuickNote.Notes do
     |> Repo.update()
   end
 
+  def delete_folder(folder) do
+    Repo.delete(folder)
+  end
+
   def register_note(attrs) do
     %Note{}
     |> Note.changeset(attrs)
@@ -68,5 +72,9 @@ defmodule QuickNote.Notes do
     note
     |> Note.changeset(attrs)
     |> Repo.update()
+  end
+
+  def delete_note(note) do
+    Repo.delete(note)
   end
 end

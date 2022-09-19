@@ -45,4 +45,20 @@ defmodule QuickNoteWeb.UserNotesController do
         redirect(conn, to: Routes.user_notes_path(conn, :show, folder_id, note.id))
     end
   end
+
+  def delete(conn, %{"id" => folder_id, "note_id" => note_id}) do
+    note = Notes.get_note_by_id(conn.assigns.current_user.id, note_id)
+
+    case Notes.delete_note(note) do
+      {:error, _} ->
+        conn
+        |> put_flash(:error, "Something went wrong. Please try it later.")
+        |> render("show.html", note: note, folder_id: folder_id)
+
+      {:ok, _note} ->
+        conn
+        |> put_flash(:info, "Deleted #{note.title}")
+        |> redirect(to: Routes.user_folders_path(conn, :show, folder_id))
+    end
+  end
 end
