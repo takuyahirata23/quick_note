@@ -96,8 +96,10 @@ defmodule QuickNoteWeb do
       import Phoenix.View
 
       import QuickNoteWeb.ErrorHelpers
+      import QuickNoteWeb.LiveHelpers
       import QuickNoteWeb.Gettext
       alias QuickNoteWeb.Router.Helpers, as: Routes
+      alias Phoenix.LiveView.JS
     end
   end
 

@@ -80,13 +80,14 @@ defmodule QuickNoteWeb.Router do
     get "/users/settings", UserSettingsController, :edit
     put "/users/settings", UserSettingsController, :update
     get "/users/settings/confirm_email/:token", UserSettingsController, :confirm_email
-    resources "/users/folders", UserFoldersController
-    get "/users/folders/:id/notes", UserNotesController, :new
-    post "/users/folders/:id/notes", UserNotesController, :create
-    get "/users/folders/:id/notes/:note_id", UserNotesController, :show
-    get "/users/folders/:id/notes/:note_id/edit", UserNotesController, :edit
-    put "/users/folders/:id/notes/:note_id", UserNotesController, :update
-    delete "/users/folders/:id/notes/:note_id", UserNotesController, :delete
+    live "/users/folders", UserFolderLive
+    # resources "/users/folders", UserFoldersController
+    # get "/users/folders/:id/notes", UserNotesController, :new
+    # post "/users/folders/:id/notes", UserNotesController, :create
+    # get "/users/folders/:id/notes/:note_id", UserNotesController, :show
+    # get "/users/folders/:id/notes/:note_id/edit", UserNotesController, :edit
+    # put "/users/folders/:id/notes/:note_id", UserNotesController, :update
+    # delete "/users/folders/:id/notes/:note_id", UserNotesController, :delete
   end
 
   scope "/", QuickNoteWeb do
