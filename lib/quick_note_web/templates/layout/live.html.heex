@@ -6,30 +6,25 @@
   <p class="alert alert-danger" role="alert"
                                 phx-click="lv:clear-flash"
                                 phx-value-key="error"><%= live_flash(@flash, :error) %></p>
-  <%# <div class="max-w-7xl mx-auto w-11/12"> %>
-  <div class="">
-    <header class="flex justify-between items-center">
-      <h1 class="text-2xl font-bold font-heading" id="test">Quick Note</h1>
-      <nav class="relative">
-        <button phx-click={show_sidebar()}>
-          <%= Heroicons.icon("bars-3", type: "outline", class: "w-6") %>
-        </button>
-        <ul id="sidebar" class="bg-primary text-background p-4 absolute top-0 right-0 hidden w-72 h-screen">
-          <button phx-click={hide_sidebar()}>
+  <header class="flex justify-between items-center py-2">
+    <h1 class="text-2xl font-bold font-heading" id="test">Quick Note</h1>
+    <nav>
+      <button phx-click={show_sidebar()}>
+        <%= Heroicons.icon("bars-3", type: "outline", class: "w-6") %>
+      </button>
+      <div id="sidebar-overlay" class="absolute inset-0 bg-dark/20 hidden z-50"></div>
+      <div id="sidebar"  class="flex-col bg-primary text-background p-4 z-50 absolute top-0 right-0 hidden w-72 h-screen">
+        <button phx-click={hide_sidebar()} class="self-end">
           <%= Heroicons.icon("x-mark", type: "outline", class: "w-6") %>
-          </button>
+        </button>
+        <ul class="mt-2">
           <li>Menu</li>
           <li>Menu</li>
         </ul>
-      </nav>
-    </header>
-    <div class="py-6">
-      <%= @inner_content %>
-    </div>
+      </div>
+    </nav>
+  </header>
+  <div class="py-6">
+    <%= @inner_content %>
   </div>
 </main>
-    <%# <header class="py-4 flex justify-between items-center"> %>
-    <%#   <%= link to: "/" do %1> %>
-    <%#     <h1 class="text-2xl font-bold font-heading">Quick Note</h1> %>
-    <%#   <% end %1> %>
-    <%# </header> %>
