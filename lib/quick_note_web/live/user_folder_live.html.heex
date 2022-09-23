@@ -1,0 +1,13 @@
+<div class="flex items-center justify-between mb-4">
+  <h2 class="font-semibold text-xl">Folders</h2>
+  <%# <%= link("Create folder", to: Routes.user_folders_path(@conn, :new))  %1> %>
+</div>
+<ul class="flex flex-col gap-y-4">
+  <%= for %{folder: folder, note_count: note_count } <- @folders do %>
+    <li class="flex flex-col gap-y-4 drop-shadow-lg bg-white p-8 rounded-lg">
+      <%# <%= link to: Routes.user_folders_path(@conn, :show, folder.id) do %1> %>
+        <h3 class="text-md font-semibold"><%= folder.name %>  (<%= note_count %>)</h3>
+      <%# <% end %1> %>
+    </li>
+  <% end %>
+</ul>

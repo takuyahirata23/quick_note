@@ -1,15 +1,20 @@
 defmodule QuickNoteWeb.UserFolderLive do
   use QuickNoteWeb, :live_view
 
-  def mount(_params, _session, socket) do
-    {:ok, socket}
+  alias QuickNote.Accounts
+  alias QuickNote.Notes
+
+  def mount(_params, session, socket) do
+    IO.inspect(session)
+    #    folders = get_folders(session, socket)
+    {:ok, assign(socket, folders: [])}
   end
 
-  def render(assigns) do
-    ~H"""
-        <div>
-        <h1>here</h1>
-        </div>
-    """
+  defp get_folders(session, socket) do
+    if connected?(socket) do
+      Accounts.get_user_by_session_token(session["user_token"])
+    else
+      []
+    end
   end
 end
