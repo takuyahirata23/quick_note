@@ -21,4 +21,16 @@ defmodule QuickNoteWeb.LiveHelpers do
       transition: {"ease-in duration-300", "translate-x-0", "translate-x-full"}
     )
   end
+
+  def show_modal(js \\ %JS{}) do
+    js
+    |> JS.show(to: "#modal-overlay")
+    |> JS.show(to: "#modal", display: "flex")
+  end
+
+  def close_modal(js \\ %JS{}) do
+    js
+    |> JS.hide(to: "#modal-overlay")
+    |> JS.hide(to: "#modal")
+  end
 end
