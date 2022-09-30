@@ -13,8 +13,15 @@ defmodule QuickNoteWeb.UserFolderLive do
     {:ok, assign(socket, folders: [], changeset: changeset)}
   end
 
-  def handle_params(params, url, socket) do
-    LayoutComponent.show_modal(%{show: true})
+  def handle_params(_params, _url, socket) do
+    case socket.assigns.live_action do
+      :new ->
+        LayoutComponent.show_modal(%{show: true})
+
+      _ ->
+        LayoutComponent.hide_modal()
+    end
+
     {:noreply, socket}
   end
 
