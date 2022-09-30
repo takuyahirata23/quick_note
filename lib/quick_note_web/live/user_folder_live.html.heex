@@ -1,6 +1,7 @@
 <div class="flex items-center justify-between mb-4">
   <h2 class="font-semibold text-xl">Folders</h2>
-  <button phx-click={show_modal()}>Create folder</button>
+  <%# <button patch={Routes.user_folder_path(@socket, :new)}>Create folder</button> %>
+  <.link navigate={Routes.user_folder_path(@socket, :new)}>Create folder</.link>
 </div>
 <ul class="flex flex-col gap-y-4">
   <%= for %{folder: folder, note_count: note_count } <- @folders do %>
@@ -12,27 +13,21 @@
   <% end %>
 </ul>
 
-<.modal>
-<.form let={f} for={@changeset} action="#" phx-submit="create">
-  <%= if @changeset.action do %>
-    <div class="alert alert-danger">
-      <p>Oops, something went wrong! Please check the errors below.</p>
-    </div>
-  <% end %>
+<%# <.modal> %>
+<%# <.form let={f} for={@changeset} action="#" phx-submit="create"> %>
+<%#   <%= if @changeset.action do %1> %>
+<%#     <div class="alert alert-danger"> %>
+<%#       <p>Oops, something went wrong! Please check the errors below.</p> %>
+<%#     </div> %>
+<%#   <% end %1> %>
 
-  <div class="flex flex-col">
-    <div class="flex flex-col gap-y-1">
-      <%= label f, :name, class: "text-md" %>
-      <%= text_input f, :name, required: true, class: "border-none bg-light rounded-md"  %>
-      <%= error_tag f, :name %>
-    </div>
-      <%= submit "Create", class: "w-1/2 mx-auto bg-primary text-white py-2 rounded-md mt-4" %>
-  </div>
-</.form>
-</.modal>
-  <%# <:cancel> %>
-  <%# <button phx-click={close_modal()} class="flex-1 bg-accent rounded-lg">Cancel</button> %>
-  <%# </:cancel> %>
-  <%# <:confirm> %>
-  <%#   <button class="flex-1 bg-primary text-white py-2 rounded-md">Confirm</button> %>
-  <%# </:confirm> %>
+<%#   <div class="flex flex-col"> %>
+<%#     <div class="flex flex-col gap-y-1"> %>
+<%#       <%= label f, :name, class: "text-md" %1> %>
+<%#       <%= text_input f, :name, required: true, class: "border-none bg-light rounded-md"  %1> %>
+<%#       <%= error_tag f, :name %1> %>
+<%#     </div> %>
+<%#       <%= submit "Create", class: "w-1/2 mx-auto bg-primary text-white py-2 rounded-md mt-4" %1> %>
+<%#   </div> %>
+<%# </.form> %>
+<%# </.modal> %>
