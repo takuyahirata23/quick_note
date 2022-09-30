@@ -28,6 +28,17 @@ defmodule QuickNote.Notes do
     Repo.all(query)
   end
 
+  def get_folders_with_note_counts_by_user_id(id) when is_binary(id) do
+    query =
+      from f in Folder,
+        where: [user_id: ^id],
+        left_join: n in assoc(f, :notes),
+        group_by: f.id,
+        select: %{folder: f, note_count: count(n.id)}
+
+    Repo.all(query)
+  end
+
   def get_folder_by_id(id) when is_binary(id) do
     query =
       from f in Folder,
