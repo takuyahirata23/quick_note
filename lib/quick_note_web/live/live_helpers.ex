@@ -39,7 +39,7 @@ defmodule QuickNoteWeb.LiveHelpers do
   def modal(assigns) do
     ~H"""
     <div id={@id}>
-      <div class="flex absolute inset-0 bg-primary/20 items-center justify-center">
+      <div class="flex absolute inset-0 bg-primary/20 items-center justify-center z-50">
         <div class="bg-white p-8 rounded-md drop-shadow-sm w-11/12">
           <%= render_slot(@inner_block) %>
           <div class="flex gap-x-4 items-center mt-8">

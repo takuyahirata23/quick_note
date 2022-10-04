@@ -2,19 +2,23 @@ defmodule QuickNoteWeb.UserFolderLive do
   use QuickNoteWeb, :live_view
   use Phoenix.Component
 
-  alias QuickNote.Notes.Folder
   alias QuickNote.Notes
   alias QuickNoteWeb.LayoutComponent
 
   def mount(_params, session, socket) do
     folders = get_folders(session, socket)
-    {:ok, assign(socket, folders: folders)}
+    {:ok, assign(socket, folders: folders, user_id: session["user_id"])}
   end
 
   def handle_params(_params, _url, socket) do
+    IO.puts("\n\n\nRUN\n\n\n")
+
     case socket.assigns.live_action do
       :new ->
-        LayoutComponent.show_modal(QuickNoteWeb.FolderFormComponent, %{show: true})
+        LayoutComponent.show_modal(QuickNoteWeb.FolderFormComponent, %{
+          show: true,
+          user_id: socket.assigns.user_id
+        })
 
       _ ->
         LayoutComponent.hide_modal()
@@ -29,11 +33,5 @@ defmodule QuickNoteWeb.UserFolderLive do
     else
       []
     end
-  end
-
-  def handle_event("create", _params, socket) do
-    push_patch(socket, to: "/users/folders")
-    changeset = Folder.changeset(%Folder{})
-    {:noreply, assign(socket, folders: [], changeset: changeset)}
   end
 end

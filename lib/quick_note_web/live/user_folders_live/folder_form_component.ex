@@ -2,17 +2,25 @@ defmodule QuickNoteWeb.FolderFormComponent do
   use QuickNoteWeb, :live_component
 
   alias QuickNote.Notes.Folder
+  alias QuickNote.Accounts
+  alias QuickNote.Notes
 
-  def update(_assigns, socket) do
+  def update(assigns, socket) do
     changeset = Folder.changeset(%Folder{})
-    {:ok, assign(socket, changeset: changeset)}
+    user = Accounts.get_user!(assigns.user_id)
+    {:ok, assign(socket, changeset: changeset, user: user)}
   end
 
-  def handle_event("create", params, socket) do
-    IO.puts("\n\n\n")
-    IO.inspect(params)
-    IO.puts("\n\n\n")
-    {:noreply, socket}
+  def handle_event("create", %{"folder" => attrs}, socket) do
+    case Notes.register_folder(attrs, socket.assigns.user) do
+      {:error, %Ecto.Changeset{} = changeset} ->
+        {:noreply, changeset: changeset}
+
+      {:ok, _notes} ->
+        {:noreply, push_patch(socket, to: "/users/folders")}
+    end
+
+    {:noreply, push_patch(socket, to: "/users/folders")}
   end
 
   def render(assigns) do
@@ -37,5 +45,3 @@ defmodule QuickNoteWeb.FolderFormComponent do
     """
   end
 end
-
-# <%= submit "Create", class: "w-1/2 mx-auto bg-primary text-white py-2 rounded-md mt-4" %>

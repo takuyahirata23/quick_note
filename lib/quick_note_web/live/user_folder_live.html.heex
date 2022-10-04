@@ -1,7 +1,7 @@
 <div class="flex items-center justify-between mb-4">
   <h2 class="font-semibold text-xl">Folders</h2>
   <%# <button patch={Routes.user_folder_path(@socket, :new)}>Create folder</button> %>
-  <.link navigate={Routes.user_folder_path(@socket, :new)}>Create folder</.link>
+  <.link patch={Routes.user_folder_path(@socket, :new)}>Create folder</.link>
 </div>
 <ul class="flex flex-col gap-y-4">
   <%= for %{folder: folder, note_count: note_count } <- @folders do %>
