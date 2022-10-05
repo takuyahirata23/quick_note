@@ -44,7 +44,7 @@ defmodule QuickNoteWeb.LiveHelpers do
           <%= render_slot(@inner_block) %>
           <div class="flex gap-x-4 items-center mt-8">
             <div class="flex-1">
-              <.link navigate={@cancel_path} class="bg-accent rounded-md p-2 w-full block text-center">Cancel</.link>
+              <.link patch={@cancel_path} class="bg-accent rounded-md p-2 w-full block text-center">Cancel</.link>
             </div>
             <div class="flex-1">
               <button class="bg-primary text-background rounded-md p-2 w-full">Create</button>

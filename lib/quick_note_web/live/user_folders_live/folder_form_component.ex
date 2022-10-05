@@ -11,6 +11,11 @@ defmodule QuickNoteWeb.FolderFormComponent do
     {:ok, assign(socket, changeset: changeset, user: user)}
   end
 
+  def handle_event("try", params, socket) do
+    IO.inspect(params)
+    {:noreply, push_patch(socket, to: "/users/folders")}
+  end
+
   def handle_event("create", %{"folder" => attrs}, socket) do
     case Notes.register_folder(attrs, socket.assigns.user) do
       {:error, %Ecto.Changeset{} = changeset} ->
