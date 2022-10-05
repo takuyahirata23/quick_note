@@ -11,11 +11,6 @@ defmodule QuickNoteWeb.FolderFormComponent do
     {:ok, assign(socket, changeset: changeset, user: user)}
   end
 
-  def handle_event("try", params, socket) do
-    IO.inspect(params)
-    {:noreply, push_patch(socket, to: "/users/folders")}
-  end
-
   def handle_event("create", %{"folder" => attrs}, socket) do
     case Notes.register_folder(attrs, socket.assigns.user) do
       {:error, %Ecto.Changeset{} = changeset} ->
@@ -31,21 +26,31 @@ defmodule QuickNoteWeb.FolderFormComponent do
   def render(assigns) do
     ~H"""
     <div>
-    <.form :let={f} for={@changeset}  phx-submit="create" action="#" phx-target={@myself}>
-      <%= if @changeset.action do %>
-        <div class="alert alert-danger">
+      <.form :let={f} for={@changeset}  phx-submit="create" action="#" phx-target={@myself}>
+        <%= if @changeset.action do %>
+          <div class="alert alert-danger">
           <p>Oops, something went wrong! Please check the errors below.</p>
-        </div>
-      <% end %>
+          </div>
+          <% end %>
 
-      <div class="flex flex-col">
+        <div class="flex flex-col">
         <div class="flex flex-col gap-y-1">
-          <%= label f, :name, class: "text-md" %>
+        <%= label f, :name, class: "text-md" %>
           <%= text_input f, :name, required: true, class: "border-none bg-light rounded-md"  %>
           <%= error_tag f, :name %>
+            </div>
+          </div>
+          <div class="flex gap-x-4 items-center-8 mt-8">
+            <div class="flex-1">
+              <.link patch={Routes.user_folders_path(@socket, :index)} class="bg-accent rounded-md p-2 w-full block text-center">
+                Cancel
+              </.link>
+            </div>
+            <div class="flex-1">
+            <%= submit "Save", class: "bg-primary text-background rounded-md p-2 w-full" %>
+          </div>
         </div>
-      </div>
-    </.form>
+      </.form>
     </div>
     """
   end

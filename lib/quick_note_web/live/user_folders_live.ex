@@ -1,4 +1,4 @@
-defmodule QuickNoteWeb.UserFolderLive do
+defmodule QuickNoteWeb.UserFoldersLive do
   use QuickNoteWeb, :live_view
   use Phoenix.Component
 

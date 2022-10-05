@@ -34,7 +34,7 @@ defmodule QuickNoteWeb.LayoutComponent do
     ~H"""
     <div class={unless @show, do: "hidden"}>
       <%= if @show do %>
-      <.modal id={@id} cancel_path={Routes.user_folder_path(@socket, :index)}>
+      <.modal id={@id} cancel_path={Routes.user_folders_path(@socket, :index)}>
         <.live_component module={@module} id="here" user_id={@user_id}/>
       </.modal>
         <% end %>
