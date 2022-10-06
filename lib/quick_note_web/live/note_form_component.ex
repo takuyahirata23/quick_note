@@ -1,16 +1,39 @@
 defmodule QuickNoteWeb.NoteFormComponent do
   use QuickNoteWeb, :live_component
 
+  alias QuickNote.Notes
   alias QuickNote.Notes.Note
 
   def update(assigns, socket) do
     changeset = Note.changeset(%Note{})
-    {:ok, assign(socket, changeset: changeset, folder_id: assigns.folder_id)}
+
+    {:ok,
+     assign(socket, changeset: changeset, folder_id: assigns.folder_id, user_id: assigns.user_id)}
   end
 
-  # def handle_event("create", _, socket) do
-  #   {:noreply, socket}
-  # end
+  def handle_event("create", %{"note" => attrs}, socket) do
+    attrs =
+      Map.merge(attrs, %{
+        "user_id" => socket.assigns.user_id,
+        "folder_id" => socket.assigns.folder_id
+      })
+
+    case Notes.register_note(attrs) do
+      {:error, %Ecto.Changeset{} = changeset} ->
+        {:noreply, assign(socket, changeset: changeset)}
+
+      {:ok, _note} ->
+        {:noreply,
+         push_patch(socket,
+           to:
+             Routes.live_path(
+               socket,
+               QuickNoteWeb.UserFolderDetailLive,
+               socket.assigns.folder_id
+             )
+         )}
+    end
+  end
 
   def render(assigns) do
     ~H"""
