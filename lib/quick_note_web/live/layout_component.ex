@@ -1,13 +1,8 @@
 defmodule QuickNoteWeb.LayoutComponent do
   use QuickNoteWeb, :live_component
 
-  def show_modal(module, attrs) do
-    send_update(self(), __MODULE__,
-      id: "layout",
-      show: attrs.show,
-      module: module,
-      user_id: attrs.user_id
-    )
+  def show_modal(attrs) do
+    send_update(self(), __MODULE__, id: "layout", show: attrs.show, content_attrs: attrs)
   end
 
   def hide_modal() do
@@ -21,8 +16,7 @@ defmodule QuickNoteWeb.LayoutComponent do
          assign(socket,
            show: assigns[:show],
            id: assigns.id,
-           user_id: assigns.user_id,
-           module: assigns[:module]
+           content_attrs: assigns.content_attrs
          )}
 
       _ ->
@@ -35,7 +29,7 @@ defmodule QuickNoteWeb.LayoutComponent do
     <div class={unless @show, do: "hidden"}>
       <%= if @show do %>
         <.modal id={@id}>
-          <.live_component module={@module} id="here" user_id={@user_id}/>
+          <.live_component id="here" {@content_attrs}/>
         </.modal>
         <% end %>
     </div>

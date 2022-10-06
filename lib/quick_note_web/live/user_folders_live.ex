@@ -12,7 +12,8 @@ defmodule QuickNoteWeb.UserFoldersLive do
   def handle_params(_params, _url, socket) do
     case socket.assigns.live_action do
       :new ->
-        LayoutComponent.show_modal(QuickNoteWeb.FolderFormComponent, %{
+        LayoutComponent.show_modal(%{
+          module: QuickNoteWeb.FolderFormComponent,
           show: true,
           user_id: socket.assigns.user_id
         })
