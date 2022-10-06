@@ -13,14 +13,12 @@ defmodule QuickNoteWeb.FolderFormComponent do
 
   def handle_event("create", %{"folder" => attrs}, socket) do
     case Notes.register_folder(attrs, socket.assigns.user) do
-      {:error, %Ecto.Changeset{} = changeset} ->
-        {:noreply, changeset: changeset}
-
       {:ok, _notes} ->
         {:noreply, push_patch(socket, to: "/users/folders")}
-    end
 
-    {:noreply, push_patch(socket, to: "/users/folders")}
+      {:error, %Ecto.Changeset{} = changeset} ->
+        {:noreply, assign(socket, changeset: changeset)}
+    end
   end
 
   def render(assigns) do
@@ -39,12 +37,12 @@ defmodule QuickNoteWeb.FolderFormComponent do
           <%= text_input f, :name, required: true, class: "border-none bg-light rounded-md"  %>
           <%= error_tag f, :name %>
             </div>
-          </div>
-          <div class="flex gap-x-4 items-center-8 mt-8">
+            </div>
+            <div class="flex gap-x-4 items-center-8 mt-8">
             <div class="flex-1">
-              <.link patch={Routes.user_folders_path(@socket, :index)} class="bg-accent rounded-md p-2 w-full block text-center">
-                Cancel
-              </.link>
+            <.link patch={Routes.user_folders_path(@socket, :index)} class="bg-accent rounded-md p-2 w-full block text-center">
+            Cancel
+            </.link>
             </div>
             <div class="flex-1">
             <%= submit "Save", class: "bg-primary text-background rounded-md p-2 w-full" %>

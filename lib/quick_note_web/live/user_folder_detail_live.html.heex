@@ -1,0 +1,24 @@
+<div class="flex items-center justify-between mb-4 mt-6">
+  <h2 class="font-semibold text-xl"><%= @folder.name %></h2>
+  <div class="flex flex-col gap-y-2">
+    <.link patch={Routes.user_folder_detail_path(@socket, :new, @folder.id)}>Create Note</.link>
+    <%# <%= link("Rename", to: Routes.user_folders_path(@conn, :edit, @folder.id))  %1> %>
+  </div>
+</div>
+
+<ul class="flex flex-col gap-y-4">
+  <%= for note <- @folder.notes do %>
+    <li class="flex justify-between flex-1 items-center gap-y-4 drop-shadow-lg bg-white rounded-lg">
+      <%# <%= link to: Routes.user_notes_path(@conn, :show, @folder.id, note.id), class: "p-6 flex-1" do %1> %>
+        <h3 class="font-semibold"><%= note.title %></h3>
+        <span><%= note.copy %></span>
+      <%# <% end %1> %>
+      <button class="copy-button p-6" data-copy={note.copy}>
+        <%= Heroicons.icon("clipboard", type: "outline", class: "w-6") %>
+      </button>
+    </li>
+  <% end %>
+</ul>
+<div class="w-1/2 mx-auto mt-12 flex">
+  <%# <%= link "Delete this folder", to: Routes.user_folders_path(@conn, :delete, @folder.id), method: :delete, class: "p-2 text-secondary rounded-lg text-center flex-1" %1> %>
+</div>

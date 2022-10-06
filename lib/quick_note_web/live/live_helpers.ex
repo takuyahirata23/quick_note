@@ -22,18 +22,6 @@ defmodule QuickNoteWeb.LiveHelpers do
     )
   end
 
-  # def show_modal(js \\ %JS{}) do
-  #   js
-  #   |> JS.show(to: "#modal-overlay")
-  #   |> JS.show(to: "#modal", display: "flex")
-  # end
-
-  # def close_modal(js \\ %JS{}) do
-  #   js
-  #   |> JS.hide(to: "#modal-overlay")
-  #   |> JS.hide(to: "#modal")
-  # end
-  #
   attr :id, :string, required: true
 
   def modal(assigns) do
@@ -48,12 +36,3 @@ defmodule QuickNoteWeb.LiveHelpers do
     """
   end
 end
-
-# <div class="flex gap-x-4 items-center mt-8">
-#   <div class="flex-1">
-#     <.link patch={@cancel_path} class="bg-accent rounded-md p-2 w-full block text-center">Cancel</.link>
-#   </div>
-#   <div class="flex-1">
-#     <button class="bg-primary text-background rounded-md p-2 w-full">Create</button>
-#   </div>
-# </div>
