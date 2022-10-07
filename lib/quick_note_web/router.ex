@@ -64,12 +64,10 @@ defmodule QuickNoteWeb.Router do
     put "/users/settings", UserSettingsController, :update
     get "/users/settings/confirm_email/:token", UserSettingsController, :confirm_email
 
-    live_session :default do
-      live "/users/folders", UserFoldersLive, :index
-      live "/users/folders/new", UserFoldersLive, :new
-      live "/users/folders/:folder_id", UserFolderDetailLive
-      live "/users/folders/:folder_id/new", UserFolderDetailLive, :new
-    end
+    live "/users/folders", UserFoldersLive, :index
+    live "/users/folders/new", UserFoldersLive, :new
+    live "/users/folders/:folder_id", UserFolderDetailLive
+    live "/users/folders/:folder_id/new", UserFolderDetailLive, :new
 
     # resources "/users/folders", UserFoldersController
     # get "/users/folders/:id/notes", UserNotesController, :new

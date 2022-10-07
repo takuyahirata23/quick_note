@@ -8,18 +8,18 @@
 
 <ul class="flex flex-col gap-y-4">
   <%= for note <- @folder.notes do %>
-    <li class="flex justify-between flex-1 items-center gap-y-4 drop-shadow-lg bg-white rounded-lg">
-      <%# <%= link to: Routes.user_notes_path(@conn, :show, @folder.id, note.id), class: "p-6 flex-1" do %1> %>
+    <li class="flex justify-between  items-center gap-y-4 drop-shadow-lg bg-white rounded-lg">
+      <div class="p-4 flex gap-x-4 flex-1">
         <h3 class="font-semibold"><%= note.title %></h3>
         <span><%= note.copy %></span>
-      <%# <% end %1> %>
-      <button class="copy-button p-6" data-copy={note.copy}>
+      </div>
+      <button class="copy-button p-4" data-copy={note.copy}>
         <%= Heroicons.icon("clipboard", type: "outline", class: "w-6") %>
       </button>
     </li>
   <% end %>
 </ul>
 <div class="w-1/2 mx-auto mt-12 flex">
-<button phx-click="delete" class="p-2 text-secondary rounded-lg text-center flex-1" >Delete this button</button>
+  <button phx-click="delete" class="p-2 text-secondary rounded-lg text-center flex-1" >Delete this button</button>
 </div>
 
