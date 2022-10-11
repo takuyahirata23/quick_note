@@ -1,0 +1,18 @@
+<div class="flex flex-col gap-y-4 drop-shadow-lg bg-white p-8 rounded-lg mt-4">
+  <div class="flex justify-between items-center">
+    <h2 class="font-semibold text-xl flex-1"><%= @note.title %></h2>
+    <%# <%= link("Edit", to: Routes.user_notes_path(@conn, :edit, @folder_id, @note.id))  %1> %>
+  </div>
+  <div class="flex justify-between bg-light p-4 rounded-lg">
+    <span><%= @note.copy %></span>
+    <button class="copy-button" data-copy={@note.copy}>
+      <%= Heroicons.icon("clipboard", type: "outline", class: "w-6") %>
+    </button>
+  </div>
+  <%= if @note.description do %>
+    <p><%= @note.description %></p>
+  <% end %>
+</div>
+<%# <div class="w-1/2 mx-auto mt-8 flex"> %>
+<%#   <%= link "Delete this note", to: Routes.user_notes_path(@conn, :delete, @folder_id, @note.id), method: :delete, class: "p-2 text-secondary rounded-lg text-center flex-1" %1> %>
+<%# </div> %>
