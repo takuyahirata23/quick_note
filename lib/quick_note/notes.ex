@@ -42,6 +42,14 @@ defmodule QuickNote.Notes do
   def get_folder_by_id(id) when is_binary(id) do
     query =
       from f in Folder,
+        where: [id: ^id]
+
+    Repo.one(query)
+  end
+
+  def get_folder_with_notes_by_id(id) do
+    query =
+      from f in Folder,
         where: [id: ^id],
         preload: [:notes]
 
