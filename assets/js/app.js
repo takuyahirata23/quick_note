@@ -37,17 +37,21 @@ topbar.config({ barColors: { 0: "#29d" }, shadowColor: "rgba(0, 0, 0, .3)" });
 window.addEventListener("phx:page-loading-start", (info) => topbar.show());
 window.addEventListener("phx:page-loading-stop", (info) => topbar.hide());
 
-const btn = document.querySelector(".copy-button");
+const btn = document.querySelectorAll(".copy-button");
 
-btn?.addEventListener("click", function (e) {
-  this.children[0].classList.add("stroke-cyan-500");
-  const copy = this.dataset.copy;
+btn.forEach((b) => {
+  b.addEventListener("click", function (e) {
+    this.children[0].classList.add("stroke-cyan-500");
+    const copy = this.dataset.copy;
 
-  navigator.clipboard.writeText(copy).finally(() => {
-    setTimeout(() => this.children[0].classList.remove("stroke-cyan-500"), 300);
+    navigator.clipboard.writeText(copy).finally(() => {
+      setTimeout(
+        () => this.children[0].classList.remove("stroke-cyan-500"),
+        300
+      );
+    });
   });
 });
-
 // connect if there are any LiveViews on the page
 liveSocket.connect();
 

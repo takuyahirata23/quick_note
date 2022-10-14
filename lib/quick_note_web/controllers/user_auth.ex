@@ -26,14 +26,14 @@ defmodule QuickNoteWeb.UserAuth do
   """
   def log_in_user(conn, user, params \\ %{}) do
     token = Accounts.generate_user_session_token(user)
-    user_return_to = Routes.user_folders_path(conn, :index)
+    user_return_to = "/users/folders"
 
     conn
     |> renew_session()
     |> put_session(:user_token, token)
     |> put_session(:live_socket_id, "users_sessions:#{Base.url_encode64(token)}")
     |> maybe_write_remember_me_cookie(token, params)
-    |> redirect(to: user_return_to || signed_in_path(conn))
+    |> redirect(to: user_return_to)
   end
 
   defp maybe_write_remember_me_cookie(conn, token, %{"remember_me" => "true"}) do
@@ -91,7 +91,17 @@ defmodule QuickNoteWeb.UserAuth do
   def fetch_current_user(conn, _opts) do
     {user_token, conn} = ensure_user_token(conn)
     user = user_token && Accounts.get_user_by_session_token(user_token)
-    assign(conn, :current_user, user)
+
+    conn
+    |> assign_user_id(user)
+    |> assign(:current_user, user)
+  end
+
+  defp assign_user_id(conn, user) do
+    case user do
+      nil -> conn
+      user -> put_session(conn, :user_id, user.id)
+    end
   end
 
   defp ensure_user_token(conn) do

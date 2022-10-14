@@ -39,6 +39,7 @@ defmodule QuickNoteWeb do
 
       # Include shared imports and aliases for views
       unquote(view_helpers())
+      import Phoenix.Component
     end
   end
 
@@ -74,6 +75,7 @@ defmodule QuickNoteWeb do
       import Plug.Conn
       import Phoenix.Controller
       import Phoenix.LiveView.Router
+      import Phoenix.Component
     end
   end
 
@@ -96,8 +98,10 @@ defmodule QuickNoteWeb do
       import Phoenix.View
 
       import QuickNoteWeb.ErrorHelpers
+      import QuickNoteWeb.LiveHelpers
       import QuickNoteWeb.Gettext
       alias QuickNoteWeb.Router.Helpers, as: Routes
+      alias Phoenix.LiveView.JS
     end
   end
 

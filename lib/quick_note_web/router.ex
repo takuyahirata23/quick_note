@@ -20,30 +20,13 @@ defmodule QuickNoteWeb.Router do
   scope "/", QuickNoteWeb do
     pipe_through :browser
 
-    get "/", PageController, :index
+    get("/", PageController, :index)
   end
 
   # Other scopes may use custom stacks.
   # scope "/api", QuickNoteWeb do
   #   pipe_through :api
   # end
-
-  # Enables LiveDashboard only for development
-  #
-  # If you want to use the LiveDashboard in production, you should put
-  # it behind authentication and allow only admins to access it.
-  # If your application does not have an admins-only section yet,
-  # you can use Plug.BasicAuth to set up some basic authentication
-  # as long as you are also using SSL (which you should anyway).
-  if Mix.env() in [:dev, :test] do
-    import Phoenix.LiveDashboard.Router
-
-    scope "/" do
-      pipe_through :browser
-
-      live_dashboard "/dashboard", metrics: QuickNoteWeb.Telemetry
-    end
-  end
 
   # Enables the Swoosh mailbox preview in development.
   #
@@ -80,13 +63,20 @@ defmodule QuickNoteWeb.Router do
     get "/users/settings", UserSettingsController, :edit
     put "/users/settings", UserSettingsController, :update
     get "/users/settings/confirm_email/:token", UserSettingsController, :confirm_email
-    resources "/users/folders", UserFoldersController
-    get "/users/folders/:id/notes", UserNotesController, :new
-    post "/users/folders/:id/notes", UserNotesController, :create
-    get "/users/folders/:id/notes/:note_id", UserNotesController, :show
-    get "/users/folders/:id/notes/:note_id/edit", UserNotesController, :edit
-    put "/users/folders/:id/notes/:note_id", UserNotesController, :update
-    delete "/users/folders/:id/notes/:note_id", UserNotesController, :delete
+
+    live "/users/folders", UserFoldersLive, :index
+    live "/users/folders/new", UserFoldersLive, :new
+    live "/users/folders/:folder_id", UserFolderDetailLive
+    live "/users/folders/:folder_id/new", UserFolderDetailLive, :new
+    live "/users/folders/:folder_id/notes/:note_id", UserNoteLive
+
+    # resources "/users/folders", UserFoldersController
+    # get "/users/folders/:id/notes", UserNotesController, :new
+    # post "/users/folders/:id/notes", UserNotesController, :create
+    # get "/users/folders/:id/notes/:note_id", UserNotesController, :show
+    # get "/users/folders/:id/notes/:note_id/edit", UserNotesController, :edit
+    # put "/users/folders/:id/notes/:note_id", UserNotesController, :update
+    # delete "/users/folders/:id/notes/:note_id", UserNotesController, :delete
   end
 
   scope "/", QuickNoteWeb do
