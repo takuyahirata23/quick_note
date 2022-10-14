@@ -11,7 +11,7 @@ import Config
 # before starting your production server.
 config :quick_note, QuickNoteWeb.Endpoint,
   url: [host: "quick-note.gigalixirapp.com", port: 443],
-  check_origin: false,
+  check_origin: ["//quick-note.gigalixirapp.com", "https://quick-note.gigalixirapp.com/"],
   cache_static_manifest: "priv/static/cache_manifest.json",
   force_ssl: [rewrite_on: [:x_forwarded_proto]]
 
