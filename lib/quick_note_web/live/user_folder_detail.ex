@@ -9,20 +9,29 @@ defmodule QuickNoteWeb.UserFolderDetailLive do
   end
 
   def handle_params(_params, _url, socket) do
+    LayoutComponent.hide_modal()
+
     case socket.assigns.live_action do
       :new ->
         LayoutComponent.show_modal(%{
           module: QuickNoteWeb.NoteFormComponent,
           show: true,
-          folder_id: socket.assigns.folder.id,
+          folder_id: socket.assigns.folder_id,
           user_id: socket.assigns.user_id
+        })
+
+      :edit ->
+        LayoutComponent.show_modal(%{
+          module: QuickNoteWeb.FolderEditFormComponent,
+          show: true,
+          folder_id: socket.assigns.folder_id
         })
 
       _ ->
         LayoutComponent.hide_modal()
     end
 
-    folder = Notes.get_folder_by_id(socket.assigns.folder_id)
+    folder = Notes.get_folder_with_notes_by_id(socket.assigns.folder_id)
     {:noreply, assign(socket, folder: folder)}
   end
 
