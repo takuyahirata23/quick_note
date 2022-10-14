@@ -10,7 +10,8 @@ import Config
 # which you should run after static files are built and
 # before starting your production server.
 config :quick_note, QuickNoteWeb.Endpoint,
-  url: [host: "quick-note.gigalixirapp.com", port: 443, scheme: "https"],
+  url: [host: "quick-note.gigalixirapp.com", port: 443],
+  check_origin: false,
   cache_static_manifest: "priv/static/cache_manifest.json",
   force_ssl: [rewrite_on: [:x_forwarded_proto]]
 
