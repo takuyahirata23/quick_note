@@ -14,6 +14,8 @@
     <p><%= @note.description %></p>
   <% end %>
 </div>
-<%# <div class="w-1/2 mx-auto mt-8 flex"> %>
-  <%#   <%= link "Delete this note", to: Routes.user_notes_path(@conn, :delete, @folder_id, @note.id), method: :delete, class: "p-2 text-secondary rounded-lg text-center flex-1" %1> %>
-  <%# </div> %>
+<div class="w-1/2 mx-auto mt-8 flex">
+  <button phx-click="delete"  class="p-2 text-secondary rounded-lg text-center flex-1">
+    Delete this note
+  </button>
+</div>

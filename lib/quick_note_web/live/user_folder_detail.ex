@@ -39,8 +39,7 @@ defmodule QuickNoteWeb.UserFolderDetailLive do
     folder = Notes.get_folder_by_id(socket.assigns.folder_id)
 
     case Notes.delete_folder(folder) do
-      {:error, e} ->
-        IO.inspect(e)
+      {:error, _} ->
         socket = put_flash(socket, :error, "No")
         {:noreply, socket}
 
