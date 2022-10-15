@@ -9,9 +9,9 @@
 <ul class="flex flex-col gap-y-4">
   <%= for note <- @folder.notes do %>
     <li class="flex justify-between  items-center gap-y-4 drop-shadow-lg bg-white rounded-lg">
-      <.link navigate={Routes.live_path(@socket, QuickNoteWeb.UserNoteLive, @folder.id, note.id)} class="p-4 flex gap-x-4 flex-1">
-        <h3 class="font-semibold"><%= note.title %></h3>
-        <span><%= note.copy %></span>
+      <.link navigate={Routes.user_note_path(@socket, :index, @folder.id, note.id)} class="p-4 flex gap-x-4 flex-1">
+      <h3 class="font-semibold"><%= note.title %></h3>
+      <span><%= note.copy %></span>
       </.link>
       <button class="copy-button p-4" data-copy={note.copy}>
         <%= Heroicons.icon("clipboard", type: "outline", class: "w-6") %>
