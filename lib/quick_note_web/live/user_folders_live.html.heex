@@ -5,7 +5,7 @@
 <ul class="flex flex-col gap-y-4">
   <%= for %{folder: folder, note_count: note_count } <- @folders do %>
     <li class="flex flex-col gap-y-4 drop-shadow-lg bg-white p-8 rounded-lg">
-      <.link navigate={Routes.live_path(@socket, QuickNoteWeb.UserFolderDetailLive,  folder.id)} >
+      <.link navigate={Routes.user_folder_detail_path(@socket, :index,  folder.id)} >
         <h3 class="text-md font-semibold"><%= folder.name %>  (<%= note_count %>)</h3>
       </.link>
     </li>

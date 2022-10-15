@@ -8,7 +8,10 @@
                                   phx-click="lv:clear-flash"
                                   phx-value-key="error"><%= live_flash(@flash, :error) %></p>
     <header class="flex justify-between items-center py-2">
-      <h1 class="text-2xl font-bold font-heading" id="test">Quick Note</h1>
+      <.link navigate="/">
+      <h1 class="text-2xl font-bold font-heading" id="test">
+        Quick Note</h1>
+      </.link>
       <nav>
         <button phx-click={show_sidebar()}>
           <%= Heroicons.icon("bars-3", type: "outline", class: "w-6") %>
@@ -19,10 +22,8 @@
             <%= Heroicons.icon("x-mark", type: "outline", class: "w-6") %>
           </button>
           <ul class="mt-2 flex flex-col gap-y-4">
-            <li>Home</li>
-            <li>Folders</li>
-            <li>Register</li>
-            <li>Log in</li>
+            <.link navigate="/">Home</.link>
+            <.link patch={Routes.user_folders_path(@socket, :index)}>Folders</.link>
           </ul>
         </div>
       </nav>
