@@ -22,10 +22,8 @@
             <%= Heroicons.icon("x-mark", type: "outline", class: "w-6") %>
           </button>
           <ul class="mt-2 flex flex-col gap-y-4">
-            <li>Home</li>
-            <li>Folders</li>
-            <li>Register</li>
-            <li>Log in</li>
+            <.link navigate="/">Home</.link>
+            <.link patch={Routes.user_folders_path(@socket, :index)}>Folders</.link>
           </ul>
         </div>
       </nav>
