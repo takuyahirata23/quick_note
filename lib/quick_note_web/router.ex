@@ -66,7 +66,7 @@ defmodule QuickNoteWeb.Router do
 
     live "/users/folders", UserFoldersLive, :index
     live "/users/folders/new", UserFoldersLive, :new
-    live "/users/folders/:folder_id", UserFolderDetailLive
+    live "/users/folders/:folder_id", UserFolderDetailLive, :index
     live "/users/folders/:folder_id/new", UserFolderDetailLive, :new
     live "/users/folders/:folder_id/edit", UserFolderDetailLive, :edit
     live "/users/folders/:folder_id/notes/:note_id", UserNoteLive, :index

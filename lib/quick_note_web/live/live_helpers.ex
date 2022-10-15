@@ -35,4 +35,13 @@ defmodule QuickNoteWeb.LiveHelpers do
     </div>
     """
   end
+
+  def patch_back_button(assigns) do
+    ~H"""
+    <.link patch={@patch} class="flex gap-x-2 items-center">
+      <%= Heroicons.icon("arrow-left", type: "outline", class: "w-6") %>
+      <span>Back</span>
+    </.link>
+    """
+  end
 end

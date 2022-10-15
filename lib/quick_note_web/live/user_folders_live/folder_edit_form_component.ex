@@ -19,9 +19,9 @@ defmodule QuickNoteWeb.FolderEditFormComponent do
         {:noreply,
          push_patch(socket,
            to:
-             Routes.live_path(
+             Routes.user_folder_detail_path(
                socket,
-               QuickNoteWeb.UserFolderDetailLive,
+               :index,
                socket.assigns.folder.id
              )
          )}
@@ -47,7 +47,7 @@ defmodule QuickNoteWeb.FolderEditFormComponent do
             </div>
             <div class="flex gap-x-4 items-center-8 mt-8">
             <div class="flex-1">
-            <.link patch={Routes.live_path(@socket, QuickNoteWeb.UserFolderDetailLive, @folder.id)} class="bg-accent rounded-md p-2 w-full block text-center">
+            <.link patch={Routes.user_folder_detail_path(@socket, :index, @folder.id)} class="bg-accent rounded-md p-2 w-full block text-center">
             Cancel
             </.link>
             </div>
