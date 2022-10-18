@@ -71,6 +71,7 @@ defmodule QuickNoteWeb.Router do
     live "/users/folders/:folder_id/edit", UserFolderDetailLive, :edit
     live "/users/folders/:folder_id/notes/:note_id", UserNoteLive, :index
     live "/users/folders/:folder_id/notes/:note_id/edit", UserNoteLive, :edit
+    live "/users/folders/:folder_id/notes/:note_id/delete", UserNoteLive, :delete
 
     # resources "/users/folders", UserFoldersController
     # get "/users/folders/:id/notes", UserNotesController, :new
