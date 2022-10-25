@@ -1,6 +1,5 @@
 defmodule QuickNoteWeb.UserFolderDetailLive do
   use QuickNoteWeb, :live_view
-  # use Phoenix.Component
   alias QuickNote.Notes
   alias QuickNoteWeb.LayoutComponent
 
