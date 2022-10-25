@@ -21,6 +21,6 @@
   <% end %>
 </ul>
 <div class="w-1/2 mx-auto mt-12 flex">
-  <button phx-click="delete" class="p-2 text-secondary rounded-lg text-center flex-1" >Delete this button</button>
+  <.link patch={Routes.user_folder_detail_path(@socket, :delete, @folder.id)} class="p-2 text-secondary rounded-lg text-center flex-1">Delete this button</.link>
 </div>
 
