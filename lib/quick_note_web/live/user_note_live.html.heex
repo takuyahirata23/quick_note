@@ -15,7 +15,5 @@
   <% end %>
 </div>
 <div class="w-1/2 mx-auto mt-8 flex">
-  <button phx-click="delete"  class="p-2 text-secondary rounded-lg text-center flex-1">
-    Delete this note
-  </button>
+  <.link patch={Routes.user_note_path(@socket, :delete, @folder_id, @note.id )} class="p-2 text-secondary rounded-lg text-center flex-1">Delete this note</.link>
 </div>

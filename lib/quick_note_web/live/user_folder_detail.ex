@@ -1,6 +1,5 @@
 defmodule QuickNoteWeb.UserFolderDetailLive do
   use QuickNoteWeb, :live_view
-  # use Phoenix.Component
   alias QuickNote.Notes
   alias QuickNoteWeb.LayoutComponent
 
@@ -27,24 +26,18 @@ defmodule QuickNoteWeb.UserFolderDetailLive do
           folder_id: socket.assigns.folder_id
         })
 
+      :delete ->
+        LayoutComponent.show_modal(%{
+          module: QuickNoteWeb.FolderDeletionConfirmationComponent,
+          show: true,
+          folder_id: socket.assigns.folder_id
+        })
+
       _ ->
         LayoutComponent.hide_modal()
     end
 
     folder = Notes.get_folder_with_notes_by_id(socket.assigns.folder_id)
     {:noreply, assign(socket, folder: folder)}
-  end
-
-  def handle_event("delete", _params, socket) do
-    folder = Notes.get_folder_by_id(socket.assigns.folder_id)
-
-    case Notes.delete_folder(folder) do
-      {:error, _} ->
-        socket = put_flash(socket, :error, "No")
-        {:noreply, socket}
-
-      {:ok, _} ->
-        {:noreply, push_navigate(socket, to: "/users/folders")}
-    end
   end
 end

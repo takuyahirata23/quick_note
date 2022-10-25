@@ -20,27 +20,18 @@ defmodule QuickNoteWeb.UserNoteLive do
           folder_id: socket.assigns.folder_id
         })
 
+      :delete ->
+        LayoutComponent.show_modal(%{
+          module: QuickNoteWeb.NoteDeletionConfirmationComponent,
+          show: true,
+          folder_id: socket.assigns.folder_id,
+          note: note
+        })
+
       _ ->
         LayoutComponent.hide_modal()
     end
 
     {:noreply, assign(socket, note: note)}
-  end
-
-  def handle_event("delete", _params, socket) do
-    case Notes.delete_note(socket.assigns.note) do
-      {:error, _} ->
-        socket =
-          socket
-          |> put_flash(:error, "Something went wrong. Please try it later.")
-
-        {:noreply, socket}
-
-      {:ok, _note} ->
-        {:noreply,
-         push_navigate(socket,
-           to: Routes.user_folder_detail_path(socket, :index, socket.assigns.folder_id)
-         )}
-    end
   end
 end
