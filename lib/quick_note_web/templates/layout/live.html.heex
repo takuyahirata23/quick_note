@@ -1,12 +1,14 @@
 <div>
   <main>
-    <p class="alert alert-info" role="alert"
-                                phx-click="lv:clear-flash"
-                                phx-value-key="info"><%= live_flash(@flash, :info) %></p>
+    <.flash flash={@flash} kind={:info} />
+    <.flash flash={@flash} kind={:error} />
+    <%# <p class="alert alert-info" role="alert" %>
+    <%#                             phx-click="lv:clear-flash" %>
+    <%#                             phx-value-key="info"><%= live_flash(@flash, :info) %1></p> %>
 
-    <p class="alert alert-danger" role="alert"
-                                  phx-click="lv:clear-flash"
-                                  phx-value-key="error"><%= live_flash(@flash, :error) %></p>
+    <%# <p class="alert alert-danger" role="alert" %>
+    <%#                               phx-click="lv:clear-flash" %>
+    <%#                               phx-value-key="error"><%= live_flash(@flash, :error) %1></p> %>
     <header class="flex justify-between items-center py-2">
       <.link navigate="/">
       <h1 class="text-2xl font-bold font-heading" id="test">
@@ -17,7 +19,7 @@
           <%= Heroicons.icon("bars-3", type: "outline", class: "w-6") %>
         </button>
         <div id="sidebar-overlay" class="absolute inset-0 bg-dark/20 hidden z-50"></div>
-        <div id="sidebar"  class="flex-col bg-primary text-background p-4 z-50 absolute top-0 right-0 hidden w-72 h-screen">
+        <div id="sidebar" class="flex-col bg-primary text-background p-4 z-50 absolute top-0 right-0 hidden w-72 h-screen">
           <button phx-click={hide_sidebar()} class="self-end">
             <%= Heroicons.icon("x-mark", type: "outline", class: "w-6") %>
           </button>

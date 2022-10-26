@@ -44,4 +44,39 @@ defmodule QuickNoteWeb.LiveHelpers do
     </.link>
     """
   end
+
+  def hide(js \\ %JS{}, selector) do
+    JS.hide(js,
+      to: selector,
+      time: 300,
+      transition:
+        {"transition ease-in duration-300", "transform opacity-100 scale-100",
+         "transform opacity-0"}
+    )
+  end
+
+  def flash(%{kind: :info} = assigns) do
+    ~H"""
+    <%= if live_flash(@flash, @kind) do %>
+      <div 
+      id="flash"
+      phx-click={JS.push("lv:clear-flash") |> hide("#flash") |> JS.remove_class("fade-in-scale", to: "#flash")}
+      class="bg-light flex gap-x-4 items-center rounded-lg px-4 py-2 fixed top-10 left-1  right-1 z-100 fade-in-scale">
+      <div class="grow text-dark">
+      <%= live_flash(@flash, @kind)%>
+      </div>
+      <button type="button" class="self-end">
+    <%= Heroicons.icon("x-mark", type: "outline", class: "w-6 text-dark") %>
+    </button>
+    </div>
+    <% end %>
+    """
+  end
+
+  def flash(%{kind: :error} = assigns) do
+    ~H"""
+    <%= if live_flash(@flash, @kind) do %>
+      <% end %>
+    """
+  end
 end
