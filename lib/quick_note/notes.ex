@@ -90,6 +90,7 @@ defmodule QuickNote.Notes do
     %Note{}
     |> Note.changeset(attrs)
     |> Repo.insert()
+    |> broadcast_note_activity(:note_created)
   end
 
   def get_note_by_id(user_id, id) do
@@ -115,5 +116,17 @@ defmodule QuickNote.Notes do
 
   def delete_note(note) do
     Repo.delete(note)
+    |> broadcast_note_activity(:note_deleted)
   end
+
+  def subscribe_note_activity do
+    Phoenix.PubSub.subscribe(QuickNote.PubSub, "notes")
+  end
+
+  def broadcast_note_activity({:ok, note}, event) do
+    Phoenix.PubSub.broadcast(QuickNote.PubSub, "notes", {event, note})
+    {:ok, note}
+  end
+
+  def broadcast_note_activity({:error, _reason} = error, _event), do: error
 end
