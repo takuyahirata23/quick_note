@@ -3,6 +3,7 @@ defmodule QuickNote.Notes do
 
   alias QuickNote.Repo
   alias QuickNote.Notes.{Folder, Note}
+  alias QuickNote.Accounts.User
 
   def register_folder(attrs, user) do
     %Folder{}
@@ -18,8 +19,11 @@ defmodule QuickNote.Notes do
     |> Repo.all()
   end
 
-  def get_folder_count do
-    Repo.aggregate(Folder, :count)
+  def get_home_dashboard_stats do
+    user_count = Repo.aggregate(User, :count)
+    folder_count = Repo.aggregate(Folder, :count)
+    note_count = Repo.aggregate(Note, :count)
+    %{user_count: user_count, folder_count: folder_count, note_count: note_count}
   end
 
   def get_folders_with_note_counts(user) do

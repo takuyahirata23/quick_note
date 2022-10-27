@@ -5,8 +5,9 @@ defmodule QuickNoteWeb.HomeDashboardLive do
 
   def mount(_params, _session, socket) do
     if connected?(socket), do: Notes.subscribe_folder_activity()
-    folder_count = Notes.get_folder_count()
-    {:ok, assign(socket, folder_count: folder_count)}
+    stats = Notes.get_home_dashboard_stats()
+
+    {:ok, assign(socket, stats: stats)}
   end
 
   def handle_info({:folder_created, _folder}, socket) do

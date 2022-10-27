@@ -3,15 +3,15 @@
   <div class="flex gap-x-4">
     <div class="flex flex-col gap-y-4 drop-shadow-lg bg-white p-6 rounded-lg items-center flex-1">
       <p>Users</p>
-      <span>1</span>
+      <span><%= @stats.user_count %></span>
     </div>
     <div class="flex flex-col gap-y-4 drop-shadow-lg bg-white p-6 rounded-lg items-center flex-1">
       <p>Folders</p>
-      <span><%= @folder_count %></span>
+      <span><%= @stats.folder_count %></span>
     </div>
     <div class="flex flex-col gap-y-4 drop-shadow-lg bg-white p-6 rounded-lg items-center flex-1">
-      <p>Folders</p>
-      <span>3</span>
+      <p>Notes</p>
+      <span><%= @stats.note_count %></span>
     </div>
   </div>
 </div>
