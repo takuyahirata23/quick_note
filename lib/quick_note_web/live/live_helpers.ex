@@ -61,7 +61,7 @@ defmodule QuickNoteWeb.LiveHelpers do
       <div 
       id="flash"
       phx-click={JS.push("lv:clear-flash") |> hide("#flash") |> JS.remove_class("fade-in-scale", to: "#flash")}
-      class="bg-light flex gap-x-4 items-center rounded-lg px-4 py-2 fixed top-10 left-1  right-1 z-100 fade-in-scale">
+      class="bg-accent flex gap-x-4 items-center rounded-lg px-4 py-2 absolute bottom-8 left-0 right-0 z-100 fade-in-scale">
       <div class="grow text-dark">
       <%= live_flash(@flash, @kind)%>
       </div>
@@ -76,7 +76,18 @@ defmodule QuickNoteWeb.LiveHelpers do
   def flash(%{kind: :error} = assigns) do
     ~H"""
     <%= if live_flash(@flash, @kind) do %>
-      <% end %>
+      <div 
+      id="flash"
+      phx-click={JS.push("lv:clear-flash") |> hide("#flash") |> JS.remove_class("fade-in-scale", to: "#flash")}
+      class="bg-secondary flex gap-x-4 items-center rounded-lg px-4 py-2 absolute bottom-8 left-0 right-0 z-100 fade-in-scale">
+      <div class="grow text-background">
+      <%= live_flash(@flash, @kind)%>
+      </div>
+      <button type="button" class="self-end">
+    <%= Heroicons.icon("x-mark", type: "outline", class: "w-6 text-background") %>
+    </button>
+    </div>
+    <% end %>
     """
   end
 end

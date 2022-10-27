@@ -6,7 +6,6 @@ defmodule QuickNoteWeb.UserFoldersLive do
   alias QuickNoteWeb.LayoutComponent
 
   def mount(_params, session, socket) do
-    #    socket = socket |> put_flash(:info, "hi")
     {:ok, assign(socket, user_id: session["user_id"])}
   end
 
