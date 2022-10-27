@@ -61,7 +61,7 @@ defmodule QuickNoteWeb.LiveHelpers do
       <div 
       id="flash"
       phx-click={JS.push("lv:clear-flash") |> hide("#flash") |> JS.remove_class("fade-in-scale", to: "#flash")}
-      class="bg-accent flex gap-x-4 items-center rounded-lg px-4 py-2 absolute bottom-8 left-0 right-0 z-100 fade-in-scale">
+      class="bg-accent flex gap-x-4 items-center rounded-lg px-4 py-2 fade-in-scale">
       <div class="grow text-dark">
       <%= live_flash(@flash, @kind)%>
       </div>
@@ -79,7 +79,7 @@ defmodule QuickNoteWeb.LiveHelpers do
       <div 
       id="flash"
       phx-click={JS.push("lv:clear-flash") |> hide("#flash") |> JS.remove_class("fade-in-scale", to: "#flash")}
-      class="bg-secondary flex gap-x-4 items-center rounded-lg px-4 py-2 absolute bottom-8 left-0 right-0 z-100 fade-in-scale">
+      class="bg-secondary flex gap-x-4 items-center rounded-lg px-4 py-2 fade-in-scale">
       <div class="grow text-background">
       <%= live_flash(@flash, @kind)%>
       </div>

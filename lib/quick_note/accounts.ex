@@ -78,6 +78,7 @@ defmodule QuickNote.Accounts do
     %User{}
     |> User.registration_changeset(attrs)
     |> Repo.insert()
+    |> broadcast_user_activity(:user_created)
   end
 
   @doc """
@@ -353,5 +354,17 @@ defmodule QuickNote.Accounts do
 
   def delete_user_account(user) do
     Repo.delete(user)
+    |> broadcast_user_activity(:user_deleted)
   end
+
+  def subscribe_user_activity do
+    Phoenix.PubSub.subscribe(QuickNote.PubSub, "users")
+  end
+
+  def broadcast_user_activity({:ok, user}, event) do
+    Phoenix.PubSub.broadcast(QuickNote.PubSub, "users", {event, user})
+    {:ok, user}
+  end
+
+  def broadcast_user_activity({:error, _reason} = error, _event), do: error
 end

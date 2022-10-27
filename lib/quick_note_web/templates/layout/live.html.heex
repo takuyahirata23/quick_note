@@ -1,5 +1,10 @@
 <div>
-  <main class="min-h-screen flex flex-col">
+  <div class="my-4">
+    <.flash flash={@flash} kind={:info} />
+    <.flash flash={@flash} kind={:error} />
+  </div>
+  <main class={"flex-col #{if @socket.view != QuickNoteWeb.HomeDashboardLive, do: "min-h-screen"}"}>
+    <%= if @socket.view != QuickNoteWeb.HomeDashboardLive do%>
     <header class="flex justify-between items-center py-2">
       <.link navigate="/">
       <h1 class="text-2xl font-bold font-heading" id="test">
@@ -21,9 +26,8 @@
         </div>
       </nav>
     </header>
-    <div class="py-10 relative grow">
-    <.flash flash={@flash} kind={:info} />
-    <.flash flash={@flash} kind={:error} />
+  <% end %>
+  <div class={"relative grow #{if @socket.view != QuickNoteWeb.HomeDashboardLive, do: "py-10"}"}>
       <%= @inner_content %>
     </div>
   </main>

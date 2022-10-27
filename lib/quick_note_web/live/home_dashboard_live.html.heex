@@ -1,0 +1,17 @@
+<div class="mt-4">
+  <p class="font-semibold text-lg mb-2">Live Dashboard</p>
+  <div class="flex gap-x-4">
+    <div class="flex flex-col gap-y-4 drop-shadow-lg bg-white p-6 rounded-lg items-center flex-1">
+      <p>Users</p>
+      <span><%= @stats.user_count %></span>
+    </div>
+    <div class="flex flex-col gap-y-4 drop-shadow-lg bg-white p-6 rounded-lg items-center flex-1">
+      <p>Folders</p>
+      <span><%= @stats.folder_count %></span>
+    </div>
+    <div class="flex flex-col gap-y-4 drop-shadow-lg bg-white p-6 rounded-lg items-center flex-1">
+      <p>Notes</p>
+      <span><%= @stats.note_count %></span>
+    </div>
+  </div>
+</div>

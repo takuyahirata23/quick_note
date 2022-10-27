@@ -3,18 +3,27 @@ defmodule QuickNote.Notes do
 
   alias QuickNote.Repo
   alias QuickNote.Notes.{Folder, Note}
+  alias QuickNote.Accounts.User
 
   def register_folder(attrs, user) do
     %Folder{}
     |> Folder.changeset(attrs)
     |> Ecto.Changeset.put_assoc(:user, user)
     |> Repo.insert()
+    |> broadcast_folder_activity(:folder_created)
   end
 
   def get_folders(user) do
     Folder
     |> where(user_id: ^user.id)
     |> Repo.all()
+  end
+
+  def get_home_dashboard_stats do
+    user_count = Repo.aggregate(User, :count)
+    folder_count = Repo.aggregate(Folder, :count)
+    note_count = Repo.aggregate(Note, :count)
+    %{user_count: user_count, folder_count: folder_count, note_count: note_count}
   end
 
   def get_folders_with_note_counts(user) do
@@ -63,13 +72,25 @@ defmodule QuickNote.Notes do
   end
 
   def delete_folder(folder) do
-    Repo.delete(folder)
+    Repo.delete(folder) |> broadcast_folder_activity(:folder_deleted)
   end
+
+  def subscribe_folder_activity do
+    Phoenix.PubSub.subscribe(QuickNote.PubSub, "folders")
+  end
+
+  def broadcast_folder_activity({:ok, folder}, event) do
+    Phoenix.PubSub.broadcast(QuickNote.PubSub, "folders", {event, folder})
+    {:ok, folder}
+  end
+
+  def broadcast_folder_activity({:error, _reason} = error, _event), do: error
 
   def register_note(attrs) do
     %Note{}
     |> Note.changeset(attrs)
     |> Repo.insert()
+    |> broadcast_note_activity(:note_created)
   end
 
   def get_note_by_id(user_id, id) do
@@ -95,5 +116,17 @@ defmodule QuickNote.Notes do
 
   def delete_note(note) do
     Repo.delete(note)
+    |> broadcast_note_activity(:note_deleted)
   end
+
+  def subscribe_note_activity do
+    Phoenix.PubSub.subscribe(QuickNote.PubSub, "notes")
+  end
+
+  def broadcast_note_activity({:ok, note}, event) do
+    Phoenix.PubSub.broadcast(QuickNote.PubSub, "notes", {event, note})
+    {:ok, note}
+  end
+
+  def broadcast_note_activity({:error, _reason} = error, _event), do: error
 end
