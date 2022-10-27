@@ -58,7 +58,7 @@ defmodule QuickNoteWeb.NoteFormComponent do
             </div>
             <div class="flex flex-col gap-y-1">
             <%= label f, :description, class: "text-md" %>
-          <%= text_input f, :description, class: "border-none bg-light rounded-md"  %>
+          <%= textarea f, :description, class: "border-none bg-light rounded-md", rows: 4 %>
           <%= error_tag f, :description %>
             </div>
             <div class="flex gap-x-4 items-center-8 mt-8">

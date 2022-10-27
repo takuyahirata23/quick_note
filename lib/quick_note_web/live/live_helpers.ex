@@ -28,7 +28,7 @@ defmodule QuickNoteWeb.LiveHelpers do
     ~H"""
     <div id={@id}>
       <div class="flex absolute inset-0 bg-primary/20 items-center justify-center z-50">
-        <div class="bg-white p-8 rounded-md drop-shadow-sm w-11/12">
+        <div class="bg-white p-8 rounded-md drop-shadow-sm w-11/12 lg:w-9/12 xl:w-7/12 max-w-7xl">
           <%= render_slot(@inner_block) %>
         </div>
       </div>

@@ -14,6 +14,7 @@ defmodule QuickNoteWeb.FolderFormComponent do
   def handle_event("create", %{"folder" => attrs}, socket) do
     case Notes.register_folder(attrs, socket.assigns.user) do
       {:ok, _notes} ->
+        socket = put_flash(socket, :info, "New folder created")
         {:noreply, push_patch(socket, to: "/users/folders")}
 
       {:error, %Ecto.Changeset{} = changeset} ->
