@@ -58,10 +58,12 @@ defmodule QuickNote.Notes do
   end
 
   def get_folder_with_notes_by_id(id) do
+    notes_query = from n in Note, order_by: [desc: n.is_pinned]
+
     query =
       from f in Folder,
         where: [id: ^id],
-        preload: [:notes]
+        preload: [notes: ^notes_query]
 
     Repo.one(query)
   end

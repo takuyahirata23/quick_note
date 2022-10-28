@@ -61,6 +61,10 @@ defmodule QuickNoteWeb.NoteFormComponent do
           <%= textarea f, :description, class: "border-none bg-light rounded-md", rows: 4 %>
           <%= error_tag f, :description %>
             </div>
+        <div class="flex gap-x-2 items-center mt-2">
+        <%= label f, :is_pinned, "Pin" ,class: "text-sm" %>
+        <%= checkbox f, :is_pinned %>
+        </div>
             <div class="flex gap-x-4 items-center-8 mt-8">
             <div class="flex-1">
             <.link patch={Routes.user_folder_detail_path(@socket, :index, @folder_id)} class="bg-accent rounded-md p-2 w-full block text-center">
