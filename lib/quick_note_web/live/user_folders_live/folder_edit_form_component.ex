@@ -13,9 +13,12 @@ defmodule QuickNoteWeb.FolderEditFormComponent do
   def handle_event("update", %{"folder" => attrs}, socket) do
     case Notes.update_folder(socket.assigns.folder, attrs) do
       {:error, %Ecto.Changeset{} = changeset} ->
+        socket = put_flash(socket, :error, "There was a problem updating folder")
         {:noreply, assign(socket, changeset: changeset)}
 
       {:ok, _} ->
+        socket = put_flash(socket, :info, "Updated folder")
+
         {:noreply,
          push_patch(socket,
            to:
@@ -43,6 +46,11 @@ defmodule QuickNoteWeb.FolderEditFormComponent do
         <%= label f, :name, class: "text-md" %>
           <%= text_input f, :name, required: true, class: "border-none bg-light rounded-md"  %>
           <%= error_tag f, :name %>
+            </div>
+
+            <div class="flex gap-x-2 items-center mt-2">
+            <%= label f, :is_pinned, "Pin" ,class: "text-sm" %>
+          <%= checkbox f, :is_pinned %>
             </div>
             </div>
             <div class="flex gap-x-4 items-center-8 mt-8">

@@ -37,7 +37,11 @@ defmodule QuickNoteWeb.FolderFormComponent do
         <%= label f, :name, class: "text-md" %>
           <%= text_input f, :name, required: true, class: "border-none bg-light rounded-md"  %>
           <%= error_tag f, :name %>
-            </div>
+        </div>
+        <div class="flex gap-x-2 items-center mt-2">
+        <%= label f, :is_pinned, "Pin" ,class: "text-sm" %>
+        <%= checkbox f, :is_pinned %>
+        </div>
             </div>
             <div class="flex gap-x-4 items-center-8 mt-8">
             <div class="flex-1">

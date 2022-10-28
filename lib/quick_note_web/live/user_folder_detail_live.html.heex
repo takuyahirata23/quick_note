@@ -3,7 +3,7 @@
   <h2 class="font-semibold text-xl"><%= @folder.name %></h2>
   <div class="flex flex-col gap-y-2">
     <.link patch={Routes.user_folder_detail_path(@socket, :new, @folder.id)}>Create Note</.link>
-    <.link patch={Routes.user_folder_detail_path(@socket, :edit, @folder.id)}>Rename</.link>
+    <.link patch={Routes.user_folder_detail_path(@socket, :edit, @folder.id)}>Edit</.link>
   </div>
 </div>
 

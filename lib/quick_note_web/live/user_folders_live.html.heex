@@ -4,7 +4,7 @@
 </div>
 <ul class="flex flex-col gap-y-4 lg:grid lg:grid-cols-2 lg:gap-8">
   <%= for %{folder: folder, note_count: note_count } <- @folders do %>
-    <li class="flex flex-col gap-y-4 drop-shadow-lg bg-white p-8 rounded-lg">
+    <li class={"flex flex-col gap-y-4 drop-shadow-lg p-8 rounded-lg #{if folder.is_pinned, do: "bg-light", else: "bg-white"}"}>
       <.link navigate={Routes.user_folder_detail_path(@socket, :index,  folder.id)} class="flex justify-between items-center gap-x-2">
         <h3 class="text-md font-semibold"><%= folder.name %></h3>
         <span>(<%= note_count %>)</span>

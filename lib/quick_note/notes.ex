@@ -43,6 +43,7 @@ defmodule QuickNote.Notes do
         where: [user_id: ^id],
         left_join: n in assoc(f, :notes),
         group_by: f.id,
+        order_by: [desc: f.is_pinned],
         select: %{folder: f, note_count: count(n.id)}
 
     Repo.all(query)
