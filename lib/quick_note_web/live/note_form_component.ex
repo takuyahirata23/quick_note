@@ -20,9 +20,12 @@ defmodule QuickNoteWeb.NoteFormComponent do
 
     case Notes.register_note(attrs) do
       {:error, %Ecto.Changeset{} = changeset} ->
+        socket = put_flash(socket, :error, "There was a problem creating note")
         {:noreply, assign(socket, changeset: changeset)}
 
       {:ok, _note} ->
+        socket = put_flash(socket, :info, "Created note")
+
         {:noreply,
          push_patch(socket,
            to:
