@@ -14,6 +14,7 @@ defmodule QuickNoteWeb.FolderFormComponent do
   def handle_event("create", %{"folder" => attrs}, socket) do
     case Notes.register_folder(attrs, socket.assigns.user) do
       {:ok, _notes} ->
+        socket = put_flash(socket, :info, "New folder created")
         {:noreply, push_patch(socket, to: "/users/folders")}
 
       {:error, %Ecto.Changeset{} = changeset} ->
@@ -36,7 +37,11 @@ defmodule QuickNoteWeb.FolderFormComponent do
         <%= label f, :name, class: "text-md" %>
           <%= text_input f, :name, required: true, class: "border-none bg-light rounded-md"  %>
           <%= error_tag f, :name %>
-            </div>
+        </div>
+        <div class="flex gap-x-2 items-center mt-2">
+        <%= label f, :is_pinned, "Pin" ,class: "text-sm" %>
+        <%= checkbox f, :is_pinned %>
+        </div>
             </div>
             <div class="flex gap-x-4 items-center-8 mt-8">
             <div class="flex-1">

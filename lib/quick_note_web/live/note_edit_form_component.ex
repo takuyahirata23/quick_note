@@ -12,9 +12,12 @@ defmodule QuickNoteWeb.NoteEditFormComponent do
   def handle_event("edit", %{"note" => attrs}, socket) do
     case Notes.update_note(socket.assigns.note, attrs) do
       {:error, %Ecto.Changeset{} = changeset} ->
+        socket = put_flash(socket, :error, "There was a problem updating note")
         {:noreply, assign(socket, changeset: changeset)}
 
       {:ok, note} ->
+        socket = put_flash(socket, :info, "Updated note")
+
         {:noreply,
          push_patch(socket,
            to: Routes.user_note_path(socket, :index, socket.assigns.folder_id, note.id)
@@ -45,9 +48,13 @@ defmodule QuickNoteWeb.NoteEditFormComponent do
     </div>
     <div class="flex flex-col gap-y-1">
     <%= label f, :description, class: "text-md" %>
-    <%= text_input f, :description, class: "border-none bg-light rounded-md"  %>
+    <%= textarea f, :description, class: "border-none bg-light rounded-md", rows: 4  %>
     <%= error_tag f, :description %>
     </div>
+        <div class="flex gap-x-2 items-center mt-2">
+        <%= label f, :is_pinned, "Pin" ,class: "text-sm" %>
+        <%= checkbox f, :is_pinned %>
+        </div>
     <div class="flex gap-x-4 mt-8">
     <.link patch={Routes.user_note_path(@socket, :index, @folder_id, @note.id)} class="bg-accent rounded-md p-2 text-center flex-1">
     Cancel

@@ -20,9 +20,12 @@ defmodule QuickNoteWeb.NoteFormComponent do
 
     case Notes.register_note(attrs) do
       {:error, %Ecto.Changeset{} = changeset} ->
+        socket = put_flash(socket, :error, "There was a problem creating note")
         {:noreply, assign(socket, changeset: changeset)}
 
       {:ok, _note} ->
+        socket = put_flash(socket, :info, "Created note")
+
         {:noreply,
          push_patch(socket,
            to:
@@ -58,9 +61,13 @@ defmodule QuickNoteWeb.NoteFormComponent do
             </div>
             <div class="flex flex-col gap-y-1">
             <%= label f, :description, class: "text-md" %>
-          <%= text_input f, :description, class: "border-none bg-light rounded-md"  %>
+          <%= textarea f, :description, class: "border-none bg-light rounded-md", rows: 4 %>
           <%= error_tag f, :description %>
             </div>
+        <div class="flex gap-x-2 items-center mt-2">
+        <%= label f, :is_pinned, "Pin" ,class: "text-sm" %>
+        <%= checkbox f, :is_pinned %>
+        </div>
             <div class="flex gap-x-4 items-center-8 mt-8">
             <div class="flex-1">
             <.link patch={Routes.user_folder_detail_path(@socket, :index, @folder_id)} class="bg-accent rounded-md p-2 w-full block text-center">
