@@ -6,7 +6,7 @@
   </div>
   <div class="flex justify-between bg-light p-4 rounded-lg">
     <span><%= @note.copy %></span>
-    <button class="copy-button" data-copy={@note.copy}>
+    <button id={"note-detail" <> @note.id} class="copy-button" data-copy={@note.copy} phx-hook="Copy">
       <%= Heroicons.icon("clipboard", type: "outline", class: "w-6") %>
     </button>
   </div>

@@ -14,7 +14,7 @@
       <h3 class="font-semibold"><%= note.title %></h3>
       <span><%= note.copy %></span>
       </.link>
-      <button class="copy-button p-4" data-copy={note.copy}>
+      <button id={note.id} class="copy-button p-4" data-copy={note.copy} phx-hook="Copy">
         <%= Heroicons.icon("clipboard", type: "outline", class: "w-6") %>
       </button>
     </li>

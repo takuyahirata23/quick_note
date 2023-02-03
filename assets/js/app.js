@@ -25,11 +25,34 @@ import { Socket } from "phoenix";
 import { LiveSocket } from "phoenix_live_view";
 import topbar from "../vendor/topbar";
 
+function copy() {
+  const icon = this.children[0];
+  icon.classList.add("stroke-cyan-500");
+
+  const copy = this.dataset.copy;
+
+  navigator.clipboard.writeText(copy).finally(() => {
+    setTimeout(() => icon.classList.remove("stroke-cyan-500"), 300);
+  });
+}
+
+const Hooks = {};
+
+Hooks.Copy = {
+  mounted() {
+    this.el.addEventListener("click", copy);
+  },
+  disconnected() {
+    this.el.removeEventListener("click", copy);
+  },
+};
+
 let csrfToken = document
   .querySelector("meta[name='csrf-token']")
   .getAttribute("content");
 let liveSocket = new LiveSocket("/live", Socket, {
   params: { _csrf_token: csrfToken },
+  hooks: Hooks,
 });
 
 // Show progress bar on live navigation and form submits
@@ -37,22 +60,6 @@ topbar.config({ barColors: { 0: "#29d" }, shadowColor: "rgba(0, 0, 0, .3)" });
 window.addEventListener("phx:page-loading-start", (info) => topbar.show());
 window.addEventListener("phx:page-loading-stop", (info) => topbar.hide());
 
-const btn = document.querySelectorAll(".copy-button");
-
-btn.forEach((b) => {
-  b.addEventListener("click", function (e) {
-    this.children[0].classList.add("stroke-cyan-500");
-    const copy = this.dataset.copy;
-
-    navigator.clipboard.writeText(copy).finally(() => {
-      setTimeout(
-        () => this.children[0].classList.remove("stroke-cyan-500"),
-        300
-      );
-    });
-  });
-});
-// connect if there are any LiveViews on the page
 liveSocket.connect();
 
 // expose liveSocket on window for web console debug logs and latency simulation:
