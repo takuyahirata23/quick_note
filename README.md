@@ -15,3 +15,12 @@ To start your Phoenix server:
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
 ## Deploymnet
+
+Deployed at [Gigalixir](https://www.gigalixir.com/)
+
+Use git tags before deploying a new version so it's easier to revert changes
+Create a tag: `git tag tag-name`
+Push tags: `git push --tags`
+
+After loggin into giglixir accout through cli
+Simply run `git push gigalixir`
