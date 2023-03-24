@@ -17,6 +17,8 @@ defmodule QuickNoteWeb do
   and import those modules here.
   """
 
+  def static_paths, do: ~w(assets fonts images favicon.ico robots.txt)
+
   def controller do
     quote do
       use Phoenix.Controller, namespace: QuickNoteWeb
@@ -24,6 +26,7 @@ defmodule QuickNoteWeb do
       import Plug.Conn
       import QuickNoteWeb.Gettext
       alias QuickNoteWeb.Router.Helpers, as: Routes
+      unquote(verified_routes())
     end
   end
 
@@ -102,6 +105,16 @@ defmodule QuickNoteWeb do
       import QuickNoteWeb.Gettext
       alias QuickNoteWeb.Router.Helpers, as: Routes
       alias Phoenix.LiveView.JS
+      unquote(verified_routes())
+    end
+  end
+
+  def verified_routes do
+    quote do
+      use Phoenix.VerifiedRoutes,
+        endpoint: QuickNoteWeb.Endpoint,
+        router: QuickNoteWeb.Router,
+        statics: QuickNoteWeb.static_paths()
     end
   end
 
