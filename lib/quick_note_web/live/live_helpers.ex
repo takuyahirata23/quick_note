@@ -23,6 +23,7 @@ defmodule QuickNoteWeb.LiveHelpers do
   end
 
   attr :id, :string, required: true
+  slot :inner_block, required: true
 
   def modal(assigns) do
     ~H"""
@@ -58,17 +59,22 @@ defmodule QuickNoteWeb.LiveHelpers do
   def flash(%{kind: :info} = assigns) do
     ~H"""
     <%= if live_flash(@flash, @kind) do %>
-      <div 
-      id="flash"
-      phx-click={JS.push("lv:clear-flash") |> hide("#flash") |> JS.remove_class("fade-in-scale", to: "#flash")}
-      class="bg-accent flex gap-x-4 items-center rounded-lg px-4 py-2 fade-in-scale">
-      <div class="grow text-dark">
-      <%= live_flash(@flash, @kind)%>
+      <div
+        id="flash"
+        phx-click={
+          JS.push("lv:clear-flash")
+          |> hide("#flash")
+          |> JS.remove_class("fade-in-scale", to: "#flash")
+        }
+        class="bg-accent flex gap-x-4 items-center rounded-lg px-4 py-2 fade-in-scale"
+      >
+        <div class="grow text-dark">
+          <%= live_flash(@flash, @kind) %>
+        </div>
+        <button type="button" class="self-end">
+          <%= Heroicons.icon("x-mark", type: "outline", class: "w-6 text-dark") %>
+        </button>
       </div>
-      <button type="button" class="self-end">
-    <%= Heroicons.icon("x-mark", type: "outline", class: "w-6 text-dark") %>
-    </button>
-    </div>
     <% end %>
     """
   end
@@ -76,17 +82,22 @@ defmodule QuickNoteWeb.LiveHelpers do
   def flash(%{kind: :error} = assigns) do
     ~H"""
     <%= if live_flash(@flash, @kind) do %>
-      <div 
-      id="flash"
-      phx-click={JS.push("lv:clear-flash") |> hide("#flash") |> JS.remove_class("fade-in-scale", to: "#flash")}
-      class="bg-secondary flex gap-x-4 items-center rounded-lg px-4 py-2 fade-in-scale">
-      <div class="grow text-background">
-      <%= live_flash(@flash, @kind)%>
+      <div
+        id="flash"
+        phx-click={
+          JS.push("lv:clear-flash")
+          |> hide("#flash")
+          |> JS.remove_class("fade-in-scale", to: "#flash")
+        }
+        class="bg-secondary flex gap-x-4 items-center rounded-lg px-4 py-2 fade-in-scale"
+      >
+        <div class="grow text-background">
+          <%= live_flash(@flash, @kind) %>
+        </div>
+        <button type="button" class="self-end">
+          <%= Heroicons.icon("x-mark", type: "outline", class: "w-6 text-background") %>
+        </button>
       </div>
-      <button type="button" class="self-end">
-    <%= Heroicons.icon("x-mark", type: "outline", class: "w-6 text-background") %>
-    </button>
-    </div>
     <% end %>
     """
   end
